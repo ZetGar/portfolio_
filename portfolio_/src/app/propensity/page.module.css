@@ -1,0 +1,60 @@
+.propensityAccess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 700px;
+  min-height: 100vh;
+  padding: 24px;
+  color: #fff;
+  font-weight: 600;
+  background-color: #18191a;
+  box-sizing: border-box;
+}
+
+.title > h2 {
+  text-align: center;
+}
+.title > p {
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+  font-weight: 400;
+}
+
+.propensityAccess button {
+  padding: 16px;
+  color: #fff;
+  font-weight: 600;
+  background-color: #e43d3d;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.propensityAccess button:hover {
+  background-color: #b82d2d;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.buttonWrap > button {
+  width: 100%;
+}
+
+/* 화면이 768px 이상이면 가로 배치 */
+@media screen and (min-width: 768px) {
+  .buttonWrap {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .buttonWrap > button {
+    width: 100%;
+  }
+}

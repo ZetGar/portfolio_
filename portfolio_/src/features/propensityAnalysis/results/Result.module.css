@@ -1,0 +1,18 @@
+.resultWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+}
+.buttonWrap > button {
+  width: 48%;
+}

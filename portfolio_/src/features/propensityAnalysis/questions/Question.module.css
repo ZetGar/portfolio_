@@ -1,0 +1,51 @@
+.questionText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.title h4,
+.title h2 {
+  margin: 0;
+}
+.title button {
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    margin-bottom: 20px;
+    background-color: transparent !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 50% !important;
+}
+.title button:hover {
+    background-color: #5d5d5d;
+}
+
+.binary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.binary button {
+  background-color: #e4e4e4;
+}
+
+.scale{
+    display: flex;
+    justify-content: center;
+    gap:12px;
+    width: 100%;
+}
+.scale > button {
+    width: calc(100% / 5);
+    height: 60px;
+    border-radius: 50px !important;
+}

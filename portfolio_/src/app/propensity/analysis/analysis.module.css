@@ -1,0 +1,50 @@
+.introWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.introWrap > div{
+    width: 100%;
+}
+
+.introWrap button {
+  width: 100%;
+}
+
+.introPreview {
+  width: 100%;
+  max-width: 400px;
+  height: 650px;
+  margin-top: 32px;
+}
+
+.introPreview p {
+  text-align: center;
+}
+
+.introPreview div {
+  width: 100%;
+  height: 600px;
+  margin: 0 auto 16px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.introPreview > div > iframe {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: none;
+}
+
+.buttonWrap {
+  width: 100%;
+  max-width: 700px;
+  padding: 24px;
+  box-sizing: border-box;
+}
