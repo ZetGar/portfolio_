@@ -10,7 +10,6 @@ import propensityStyles from "../page.module.css";
 import styles from "./analysis.module.css";
 
 export default function AnalysisPage() {
-  // 쿼리값으로 step, answers 가져오기
   const searchParams = useSearchParams();
   const queryStep = Number(searchParams.get("step") || 0);
   const queryAnswers = searchParams.get("answers")
@@ -20,7 +19,6 @@ export default function AnalysisPage() {
   const [step, setStep] = useState(queryStep);
   const [answers, setAnswers] = useState<number[]>(queryAnswers);
 
-  // 질문 선택 처리
   const handleAnswer = (optionIndex: number) => {
     const newAnswers = [...answers];
     newAnswers[step - 1] = optionIndex;
