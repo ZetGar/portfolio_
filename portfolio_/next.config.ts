@@ -6,7 +6,6 @@ const nextConfig: NextConfig = {
     // @ts-expect-error: appDir는 experimental 타입에 없음
     appDir: true,
   },
-  // output: export,
 };
 
 export default nextConfig;
