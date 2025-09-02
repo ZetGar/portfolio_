@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export", 
+  reactStrictMode: true,
+  experimental: {
+    // @ts-expect-error: appDir는 experimental 타입에 없음
+    appDir: true, 
+  },
 };
 
 export default nextConfig;
