@@ -13,7 +13,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={styles.childrenWrap}>{children}</body>
+      <body className={styles.childrenWrap}>
+        <div className={styles.appTop}>
+          <div>
+          <a href="/contact">CONTACT</a></div>
+        </div>
+        <div className={styles.maxWidth}>
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

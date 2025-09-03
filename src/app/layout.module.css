@@ -1,14 +1,53 @@
 .childrenWrap {
   display: flex;
   justify-content: center;
+  align-items: start;
+  width: 100vw;
   padding: 0;
   margin: 0;
+  padding: 24px;
+  background: linear-gradient(180deg, #484848, #000000);
+  box-sizing: border-box;
+}
+.childrenWrap::selection {
+  background: rgba(160, 96, 220, 0.38);
+  color: #fff;
 }
 
-.childrenWrap button {
-  padding: 8px 16px;
+.childrenWrap a {
+  padding: 8px 0 !important;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
   border: none;
-  border-radius: 8px;
+}
+
+.maxWidth{
+  max-width: 1000px;
+  /* box-sizing: border-box; */
+}
+
+.appTop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 24px;
+  background-color: #00000080;
+  box-sizing: border-box;
+}
+.appTop > div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 1000px;
+}
+.appTop > div > button {
+  padding: 0;
+  background-color: transparent;
 }
 
 /* 색상 스타일 */
