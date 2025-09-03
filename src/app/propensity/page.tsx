@@ -3,13 +3,19 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+
 import Modal from "../shared/widgets/Modal";
 import styles from "./page.module.css";
+import Image from "next/image";
 
 export default function PropensityPage() {
   const router = useRouter();
   const [hasResult, setHasResult] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showImage, setShowImage] = useState(false); // ← Lightbox 상태 추가
 
   useEffect(() => {
     const result = localStorage.getItem("propensity_result");
@@ -56,6 +62,32 @@ export default function PropensityPage() {
 
         <button onClick={handlePreviousResult}>이전 결과 보기</button>
       </div>
+
+      <div className={styles.architectureImage}>
+        <Image
+          src="/img/propensity_architecture_col.png"
+          alt="성향 분석 아키텍처"
+          width={600}
+          height={700}
+          className={styles.architectureImage}
+          onClick={() => setShowImage(true)}
+          style={{ width: "100%", height: "100%", cursor: "pointer" }}
+        />
+      </div>
+
+      {showImage && (
+        <Lightbox
+          open={showImage}
+          close={() => setShowImage(false)}
+          slides={[{ src: "/img/propensity_architecture_col.png" }]}
+          plugins={[Zoom]}
+          render={{
+            // 이전/다음 버튼 숨기기
+            buttonPrev: () => null,
+            buttonNext: () => null,
+          }}
+        />
+      )}
 
       {showModal && (
         <Modal

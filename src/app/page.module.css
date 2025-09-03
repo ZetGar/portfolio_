@@ -1,0 +1,120 @@
+.indexWrap {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  width: 100vw;
+  padding: 24px;
+  background: linear-gradient(180deg, #737373, #000000);
+}
+.indexWrap h1,
+.indexWrap h2,
+.indexWrap h3,
+.indexWrap h4,
+.indexWrap h5,
+.indexWrap h6,
+.indexWrap p {
+  margin: 0;
+  padding: 0;
+}
+.indexWrap > div {
+  max-width: 1000px;
+  overflow: hidden;
+}
+.profile,
+.about,
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 80px;
+}
+
+.profile,
+.profile p,
+.experience > h3 {
+  color: #fff;
+}
+.experience > div {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.profile > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.profile h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+.profile h4 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.profile p,
+.about p {
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.about p {
+  color: #8d8d8d;
+}
+.about p + p {
+  margin-top: 16px;
+}
+
+.about h3 {
+  color: #fff;
+  font-size: 18px;
+}
+
+.careerBox {
+  display: flex;
+  gap: 16px;
+}
+.careerBox > p {
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.careerDate {
+  color: #8d8d8d;
+  font-size: 14px;
+  font-weight: 600;
+}
+.projectBox {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 24px;
+}
+.projectBox a {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.projectBox a:hover {
+  color: #a579c7;
+}
+
+.projectBox p {
+  color: #8d8d8d;
+}
+.tabWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.tabWrap > div {
+  padding: 4px 12px;
+  color: #a579c7;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 50px;
+  background-color: #432262a3;
+}

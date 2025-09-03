@@ -1,14 +1,17 @@
 "use client";
 
-import Modal from "@/app/shared/widgets/Modal";
 import { useState, useEffect } from "react";
-import styles from "./Result.module.css";
-import { resultTextMap } from "../questions/data";
 import { useRouter } from "next/navigation";
+import Modal from "@/app/shared/widgets/Modal";
+
+import { questions } from "../questions/data";
+import { InvestmentType } from "./type";
+import { calculatePropensity } from "./data";
+import styles from "./Result.module.css";
 
 interface ResultProps {
-  step: number; // 4: 결과1, 5: 최종
-  answers: number[];
+  step: number; // 4: 중간 결과, 5: 최종
+  answers: number[]; // 각 질문에 대한 점수
   onAgree?: () => void;
   onRestart: () => void;
 }
@@ -23,9 +26,20 @@ export default function Result({
   const [agreed, setAgreed] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const displayAnswers = answers.map(
-    (answerIdx, qIdx) => resultTextMap[qIdx][answerIdx]
-  );
+  // 점수 기반으로 투자 성향 계산
+  const resultType: InvestmentType = calculatePropensity(answers);
+
+  const displayAnswers: string[] = answers.map((score, qIdx) => {
+    const question = questions[qIdx];
+    const optionIndex = question.options.findIndex(
+      (opt) => opt.value === score
+    );
+    return (
+      question.options[optionIndex]?.resultLabel ??
+      question.options[optionIndex]?.label ??
+      ""
+    );
+  });
 
   // 최종 결과(step 5)에서 로컬스토리지 저장
   useEffect(() => {
@@ -34,16 +48,18 @@ export default function Result({
     }
   }, [step, answers]);
 
+  // 결과 보기 버튼 클릭
   const handleResultClick = () => {
     if (!agreed) return setShowModal(true);
     onAgree?.();
   };
 
+  // 확인 버튼 클릭
   const handleConfirmClick = () => {
-    router.push("/propensity"); // 최종 확인 후 /propensity 이동
+    router.push("/propensity");
   };
 
-  // 버튼 클래스
+  // 버튼 스타일
   const buttonBase = "px-4 py-2 rounded text-white";
   const restartButtonClass = `${buttonBase} bg-gray-500 hover:bg-gray-600`;
   const resultButtonClass = agreed
@@ -58,6 +74,9 @@ export default function Result({
         <h2 className="text-2xl font-bold">
           {step === 4 ? "성향 분석 결과 확인" : "최종 결과"}
         </h2>
+
+        <p>사용자 성향값 : {resultType}</p>
+
         <p>사용자 선택값:</p>
         <ul className="list-disc pl-5">
           {displayAnswers.map((text, i) => (
@@ -96,6 +115,7 @@ export default function Result({
         )}
       </div>
 
+      {/* 모달 */}
       {showModal && (
         <Modal
           onClose={() => setShowModal(false)}
