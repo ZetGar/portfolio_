@@ -53,7 +53,7 @@ export default function Home() {
           <h3>EXPERIENCE</h3>
           <div>
             <div className={styles.careerBox}>
-              <p className={styles.careerDate}>2025 - PRESENT</p>
+              <p className={styles.careerDate}>PROJECT</p>
               <div className={styles.projectBox}>
                 <h4>
                   <a href="/propensity">AI Advisor PB</a>
@@ -75,17 +75,15 @@ export default function Home() {
             </div>
 
             <div className={styles.careerBox}>
-              <p className={styles.careerDate}>2024 - 2025</p>
+              <p className={styles.careerDate}>PROJECT</p>
               <div className={styles.projectBox}>
                 <h4>
                   <a href="/propensity">AI Advisor CS</a>
                 </h4>
                 <p>
-                  증권사 PB용 웹 어드바이저 시스템을 개발합니다. <br />
-                  PB가 고객 포트폴리오를 빠르게 분석하고 투자 전략을 제안할 수
-                  있도록 UI/UX 개선과 핵심 기능 코드를 고도화했습니다. <br />팀
-                  내 개발자, 디자이너, 기획자와 긴밀히 협업하며 재사용성과
-                  유지보수성을 고려해 개발했습니다.
+                  증권사 고객용 웹 어드바이저 시스템을 개발합니다. <br />팀 내
+                  개발자와 긴밀히 협업하며 재사용성과 유지보수성을 고려해
+                  개발했습니다.
                 </p>
                 <div className={styles.tabWrap}>
                   <div>Javascript</div>
@@ -97,10 +95,10 @@ export default function Home() {
             </div>
 
             <div className={styles.careerBox}>
-              <p className={styles.careerDate}>2023 - 2024</p>
+              <p className={styles.careerDate}>PROJECT</p>
               <div className={styles.projectBox}>
                 <h4>
-                  <a href="/propensity">KB계좌개설</a>
+                  <a href="/kbaccount">KB계좌개설</a>
                 </h4>
                 <p>
                   앱 내에 들어가는 웹뷰를 개발하고, 유지 관리합니다. <br />
@@ -112,13 +110,12 @@ export default function Home() {
                 <div className={styles.tabWrap}>
                   <div>Javascript</div>
                   <div>React</div>
-                  <div>NextJs</div>
                   <div>HTML 및 CSS</div>
                 </div>
               </div>
             </div>
             <div className={styles.careerBox}>
-              <p className={styles.careerDate}>2023 - 2024</p>
+              <p className={styles.careerDate}>PROJECT</p>
               <div className={styles.projectBox}>
                 <h4>
                   <a href="/propensity">투자 성향분석</a>
@@ -140,7 +137,7 @@ export default function Home() {
             </div>
 
             <div className={styles.careerBox}>
-              <p className={styles.careerDate}>2022 — 2023</p>
+              <p className={styles.careerDate}>PROJECT</p>
               <div className={styles.projectBox}>
                 <h4>
                   <a href="/smartIndex">SMART INDEX · 투자 온도계</a>
@@ -155,12 +152,45 @@ export default function Home() {
                 <div className={styles.tabWrap}>
                   <div>Javascript</div>
                   <div>React</div>
-                  <div>NextJs</div>
+                  <div>HTML 및 CSS</div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.careerBox}>
+              <p className={styles.careerDate}>MAINTENANCE · IMPROVEMENT</p>
+              <div className={styles.projectBox}>
+                <h4>
+                  <a href="/smartIndex">유지보수</a>
+                </h4>
+                <p>
+                  앱 내에 들어가는 웹뷰를 개발하고, 유지 관리합니다. <br />
+                  앱개발자, 디자이너, 기획자 등 여러 부서와 긴밀히 협력하여
+                  작업합니다.
+                  <br />
+                  사업 확장으로 인해 재사용성을 고려하며 작업되었습니다.
+                </p>
+                <div className={styles.tabWrap}>
+                  <div>Javascript</div>
+                  <div>React</div>
                   <div>HTML 및 CSS</div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className={styles.footer}>
+          <p>
+            <a href="http://www.figma.com/">Figma</a>에서 자유롭게 디자인하고{" "}
+            <a href="https://code.visualstudio.com/">Visual Studio Code</a>로
+            코딩합니다. <a href="https://nextjs.org/">Next.js</a>의{" "}
+            <a href="https://tailwindcss.com/">Tailwind CSS</a> 와{" "}
+            <a href="https://styled-components.com/">Styled-Component</a>, CSS
+            로 개발하고
+            <a href="https://www.netlify.com/">Netlify</a>를 사용하여
+            배포했습니다.
+          </p>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
   align-items: start;
   width: 100vw;
   padding: 24px;
-  background: linear-gradient(180deg, #737373, #000000);
+  background: linear-gradient(180deg, #484848, #000000);
 }
 .indexWrap h1,
 .indexWrap h2,
@@ -117,4 +117,21 @@
   font-weight: 500;
   border-radius: 50px;
   background-color: #432262a3;
+}
+
+.footer {
+  margin-top: 48px;
+  padding: 48px 0;
+  border-top: 1px solid #8d8d8d;
+}
+.footer p {
+  color: #484848;
+  font-size: 14px;
+}
+.footer p > a {
+  color: #8d8d8d;
+  text-decoration: none;
+}
+.footer p > a:hover {
+  color: #484848;
 }
