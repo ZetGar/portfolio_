@@ -60,9 +60,9 @@
   line-height: 24px;
 }
 
-.about p {
+/* .about p {
   color: #8d8d8d;
-}
+} */
 .about p + p {
   margin-top: 16px;
 }
