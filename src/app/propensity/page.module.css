@@ -1,66 +1,108 @@
-.propensityAccess {
+.page {
+  min-height: 100vh;
+}
+
+.descriptionWrap {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 40px;
+  gap: 24px;
   width: 100%;
-  max-width: 700px;
-  min-height: 100vh;
-  padding: 24px;
-  color: #fff;
-  font-weight: 600;
-  background-color: #18191a;
-  box-sizing: border-box;
 }
 
-.title > h2 {
-  text-align: center;
-}
-.title > p {
+.descriptionWrap p {
+  margin: 0;
   font-size: 14px;
   line-height: 22px;
-  text-align: center;
-  font-weight: 400;
+}
+.descriptionWrap p:nth-of-type(1) {
+  margin-bottom: 10px;
+}
+.descriptionTitleWrap {
+  width: 100% !important;
+}
+.descriptionTitleWrap > div > div > p {
+  margin-bottom: 30px;
 }
 
-.propensityAccess button {
-  padding: 16px;
-  color: #fff;
-  font-weight: 600;
-  background-color: #e43d3d;
-  border: none;
+.buttonWrap {
+  margin: 30px 0;
+}
+.buttonWrap > button {
+  max-width: 200px;
+}
+.contentWrap > p {
+  font-size: 14px;
+}
+
+.description {
+  display: flex;
+  gap: 12px;
+}
+
+.description > p {
+  width: 100px;
+  min-width: 100px;
+  color: #8d8d8d;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 800;
+}
+
+.preview {
+  width: 100%;
+  max-width: 440px;
+  height: 600px;
+  background-color: #fff;
   border-radius: 8px;
-  cursor: pointer;
+  overflow: hidden;
+}
+.preview iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
-.propensityAccess button:hover {
-  background-color: #b82d2d;
+.downloadButtonWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.downloadButtonWrap > a {
+  display: block;
+  width: 200px;
+  padding: 8px 12px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #fff !important;
+}
+.downloadButtonWrap > a:hover {
+  background-color: #1d1d1d;
 }
 
 .buttonWrap {
   display: flex;
-  flex-direction: column;
   gap: 12px;
-  width: 100%;
 }
 .buttonWrap > button {
   width: 100%;
+  padding: 8px 12px;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background-color: #892d8b;
 }
 
-/* 화면이 768px 이상이면 가로 배치 */
-@media screen and (min-width: 768px) {
-  .buttonWrap {
-    flex-direction: row;
-    justify-content: space-between;
+@media (max-width: 768px) {
+  .description {
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .buttonWrap > button {
-    width: 100%;
+  .description > p {
+    min-width: auto;
+    max-width: none;
   }
-}
-
-
-/* ------------------------architectureImage--------------------------- */
-.architectureImage{
-  width: 100%;
 }

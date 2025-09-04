@@ -2,7 +2,7 @@ export const profile = {
   name: "KIM SONG I",
   job: "Frontend Developter",
   introduction:
-    "안녕하세요. \nUX를 개선하고 구현하며, 서비스 전반에서 재사용이 가능하고\n유지보수가 쉬운 구조를 만들기 위해 노력하는 개발자 김송이입니다.",
+    "안녕하세요. \nUX를 개선하고 구현하며, 서비스 전반에서 재사용이 가능하고 유지보수가 쉬운 구조를 만들기 위해 노력하는 개발자 김송이입니다.",
 };
 
 export const about = {

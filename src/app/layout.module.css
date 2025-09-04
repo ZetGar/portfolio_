@@ -24,8 +24,10 @@
 }
 
 .maxWidth{
+  width: 100%;
   max-width: 1000px;
-  /* box-sizing: border-box; */
+  margin-top: 80px;
+  color:#fff;
 }
 
 .appTop {

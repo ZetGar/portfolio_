@@ -24,8 +24,11 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-top: 100px;
   white-space: pre-line;
+}
+.about,
+.experience {
+  margin-top: 100px;
 }
 
 .profile,
@@ -98,14 +101,31 @@
   line-height: 24px;
 }
 .projectBox a {
+  display: flex;
+  align-items: start;
+  gap: 8px;
   color: #fff;
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
 }
 .projectBox a:hover {
-  color: #a579c7;
+  color: #d09af8;
 }
+.projectBox svg {
+  width: 8px;
+  height: 8px;
+  padding-top: 4px;
+  transition: all 0.4s ease-in-out;
+}
+.projectBox a:hover svg {
+  padding-top: 0;
+  transition: all 0.4s ease-in-out;
+}
+.projectBox a:hover svg path {
+  stroke: #d09af8;
+}
+
 .projectBox p {
   color: #8d8d8d;
 }

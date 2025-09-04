@@ -3,19 +3,21 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Lightbox from "yet-another-react-lightbox";
+// import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import Zoom from "yet-another-react-lightbox/plugins/zoom";
+// import Zoom from "yet-another-react-lightbox/plugins/zoom";
 
-import Modal from "../shared/widgets/Modal";
+import { data } from "./data/data";
 import styles from "./page.module.css";
-import Image from "next/image";
+import Modal from "../shared/widgets/Modal";
+// import Modal from "../shared/widgets/Modal";
+// import Image from "next/image";
 
 export default function PropensityPage() {
   const router = useRouter();
   const [hasResult, setHasResult] = useState<boolean | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [showImage, setShowImage] = useState(false); // ← Lightbox 상태 추가
+  // const [showImage, setShowImage] = useState(false); // ← Lightbox 상태 추가
 
   useEffect(() => {
     const result = localStorage.getItem("propensity_result");
@@ -40,8 +42,8 @@ export default function PropensityPage() {
   };
 
   return (
-    <div className={styles.propensityAccess}>
-      <div className={styles.title}>
+    <div className={styles.page}>
+      {/* <div className={styles.title}>
         <h2>성향 분석</h2>
         <p>
           나의 성향을 간단한 설문을 통해 분석하고
@@ -87,7 +89,66 @@ export default function PropensityPage() {
             buttonNext: () => null,
           }}
         />
-      )}
+      )} */}
+
+      <div className={styles.title}>
+        <h2>{data.title}</h2>
+      </div>
+
+      <div className={styles.descriptionWrap}>
+        {data.description.map((desc, idx) => (
+          <div key={idx} className={styles.description}>
+            <p>{desc.title}</p>
+
+            <div className={styles.descriptionTitleWrap}>
+              {desc.content.map((c, index) => (
+                <div key={`content_${index}`} className={styles.contentWrap}>
+                  <p>{c.title}</p>
+                  <div>
+                    {c.content.map((content, cindex) => (
+                      <p key={`cindex_${cindex}`}>· {content}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+
+              {desc.actions && (
+                <div className={styles.buttonWrap}>
+                  {desc.actions.map((action, aidx) => (
+                    <button
+                      key={aidx}
+                      onClick={() => {
+                        if (action.label === "처음부터 분석하기")
+                          router.push("/propensity/analysis");
+                        if (action.label === "이전 결과 보기")
+                          handlePreviousResult();
+                      }}
+                    >
+                      {action.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+
+        {data.preview && (
+          <div className={styles.description}>
+            <p>PREVIEW</p>
+            <div>
+              <div className={styles.downloadButtonWrap}>
+                <a href={data.preview.content[0]}>GooglePlay 다운로드하기</a>
+                <a href={data.preview.content[1]}>AppleStore 다운로드하기</a>
+              </div>
+
+              <div className={styles.preview}>
+                <iframe src={data.preview.link} />
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       {showModal && (
         <Modal
