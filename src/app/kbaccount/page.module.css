@@ -1,4 +1,4 @@
-.preview {
+/* .preview {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -11,4 +11,9 @@
   max-width: 400px;
   height: 100%;
   border: none;
+} */
+
+
+.page {
+  min-height: 100vh;
 }
