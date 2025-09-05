@@ -8,6 +8,7 @@ import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Page() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -28,9 +29,9 @@ export default function Page() {
       {data.preview && (
         <div className={styles.appDownloadWrap}>
           {data.preview.content.map((previewDownload, index) => (
-            <a href={previewDownload} key={`preview_${index}`}>
+            <Link href={previewDownload} key={`preview_${index}`}>
               {index === 0 ? "구글플레이 다운로드" : "애플스토어 다운로드"}
-            </a>
+            </Link>
           ))}
         </div>
       )}

@@ -63,7 +63,7 @@ export default function RootLayout({
             </svg>
           </Link>
           <div>
-            <a href="/contact">CONTACT</a>
+            <Link href="/contact">CONTACT</Link>
           </div>
         </div>
         <div className={styles.maxWidth}>{children}</div>

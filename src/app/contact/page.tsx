@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function page() {
   return (
@@ -12,8 +13,8 @@ export default function page() {
             <p>김송이 · Frontend Developer</p>
           </div>
           <div className={styles.link}>
-            <a href="mailto:awesde10@gmail.com">Email</a>
-            <a href="https://github.com/ZetGar">Github</a>
+            <Link href="mailto:awesde10@gmail.com">Email</Link>
+            <Link href="https://github.com/ZetGar">Github</Link>
           </div>
         </div>
 

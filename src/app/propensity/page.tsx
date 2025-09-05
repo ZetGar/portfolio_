@@ -11,6 +11,7 @@ import Image from "next/image";
 import { data } from "./data/data";
 import styles from "../page.module.css";
 import Modal from "../shared/widgets/Modal";
+import Link from "next/link";
 
 export default function PropensityPage() {
   const router = useRouter();
@@ -57,9 +58,9 @@ export default function PropensityPage() {
       {data.preview && (
         <div className={styles.appDownloadWrap}>
           {data.preview.content.map((previewDownload, index) => (
-            <a href={previewDownload} key={`preview_${index}`}>
+            <Link href={previewDownload} key={`preview_${index}`}>
               {index === 0 ? "구글플레이 다운로드" : "애플스토어 다운로드"}
-            </a>
+            </Link>
           ))}
         </div>
       )}
