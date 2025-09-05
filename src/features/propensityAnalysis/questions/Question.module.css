@@ -12,21 +12,22 @@
   gap: 12px;
 }
 .title h4,
-.title h2 {
+.title h2,
+.title > button {
   margin: 0;
-  color: #76413D;
+  color: #76413d !important;
 }
 .title button {
-    width: 40px !important;
-    height: 40px;
-    padding: 0 !important;
-    margin-bottom: 20px;
-    background-color: transparent !important;
-    border: 1px solid #5d5d5d !important;
-    border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px;
+  padding: 0 !important;
+  margin-bottom: 20px;
+  background-color: transparent !important;
+  border: 1px solid #5d5d5d !important;
+  border-radius: 50% !important;
 }
 .title button:hover {
-    background-color: #5d5d5d;
+  background-color: #5d5d5d;
 }
 
 .binary {
@@ -39,28 +40,29 @@
   background-color: #5d5d5d;
 }
 
-.scale{
-    display: flex;
-    justify-content: space-between;
-    gap:12px;
-    width: 100%;
+.scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
 }
 
 .scale > button {
-    width: 60px;
-    height: 60px;
-    border-radius: 50px !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50px !important;
 }
 
-.buttonWrap{
+.buttonWrap {
   display: flex;
   flex-direction: column;
   gap: 32px;
   margin-top: 200px;
 }
 
-.auxiliaryText{
+.auxiliaryText {
   display: flex;
   justify-content: space-between;
+  color:#76413d;
   font-size: 12px;
 }

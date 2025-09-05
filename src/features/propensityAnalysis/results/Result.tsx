@@ -41,9 +41,9 @@ export default function Result({
     );
   });
 
-  // 최종 결과(step 5)에서 로컬스토리지 저장
+  // 최종 결과(step 4)에서 로컬스토리지 저장
   useEffect(() => {
-    if (step === 5) {
+    if (step === 4) {
       localStorage.setItem("propensity_result", JSON.stringify(answers));
     }
   }, [step, answers]);
@@ -72,7 +72,7 @@ export default function Result({
       {/* 상단 내용 */}
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">
-          {step === 4 ? "성향 분석 결과 확인" : "최종 결과"}
+          {step === 3 ? "성향 분석 결과 확인" : "최종 결과"}
         </h2>
 
         <p>사용자 성향값 : {resultType}</p>
@@ -84,7 +84,7 @@ export default function Result({
           ))}
         </ul>
 
-        {step === 4 && (
+        {step === 3 && (
           <label className="flex items-center gap-2 mt-4">
             <input
               type="checkbox"
