@@ -44,12 +44,12 @@ export default function Home() {
                         <path
                           d="M1 0.5H5V4.5"
                           stroke="white"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                         />
                         <path
                           d="M5 0.5L0.5 5"
                           stroke="white"
-                          stroke-linecap="round"
+                          strokeLinecap="round"
                         />
                       </svg>
                     </Link>

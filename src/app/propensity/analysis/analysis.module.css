@@ -1,4 +1,28 @@
-.introWrap {
+.backWidth{
+  display: flex;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.backWidth > div{
+  width: 400px;
+  /* background-color: #fff; */
+}
+
+.title>h2{
+  color:#76413D;
+}
+
+.backWidth button{
+  width: 100%;
+  padding: 12px 20px;
+  color:#fff;
+  background-color: #E3271E;
+  border: none;
+  border-radius: 50px;
+}
+
+/* .introWrap {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -47,4 +71,4 @@
   max-width: 700px;
   padding: 24px;
   box-sizing: border-box;
-}
+} */

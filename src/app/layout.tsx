@@ -27,38 +27,38 @@ export default function RootLayout({
               <path
                 d="M3 2L1 4H6.5L4 6.5"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M5 2.5L6.5 1L8 2.5L6.5 4L5 2.5Z"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M12.5 1L11 2.5L12.5 4L14 2.5"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M8 2.5L11 4.23205V2.5"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M8 3L8 7"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M13 2.5L18 2.5"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </Link>

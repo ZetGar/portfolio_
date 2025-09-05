@@ -1,17 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { QuestionData } from "./type";
 import styles from "./Question.module.css";
 
 interface Props {
   question: QuestionData;
   onAnswer: (value: number) => void; // 점수 전달
+  step: number;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Question({ question, onAnswer, setStep }: Props) {
+export default function Question({ question, onAnswer, step, setStep }: Props) {
+  const router = useRouter();
   const [selected, setSelected] = useState<number | null>(null);
+
+  const handlePrev = () => {
+    if (step === 0) {
+      router.push("/propensity"); // step이 0일 때 /propensity로 이동
+    } else {
+      setStep((prev) => prev - 1); // 그 외에는 step 감소
+    }
+  };
 
   const handleClick = (index: number) => {
     const option = question.options[index];
@@ -22,7 +33,13 @@ export default function Question({ question, onAnswer, setStep }: Props) {
   return (
     <div className={styles.questionText}>
       <div className={styles.title}>
-        <button onClick={() => setStep((prev) => prev - 1)}>&lt;</button>{" "}
+        <button
+          onClick={() => {
+            handlePrev()
+          }}
+        >
+          &lt;
+        </button>{" "}
         <h4>질문 {question.id} :</h4>
         <h2>{question.question}</h2>
       </div>

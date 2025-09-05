@@ -6,7 +6,7 @@ import { questions } from "@/features/propensityAnalysis/questions/data";
 import Question from "@/features/propensityAnalysis/questions/Question";
 import Result from "@/features/propensityAnalysis/results/Result";
 
-import propensityStyles from "../../page.module.css";
+// import propensityStyles from "../../page.module.css";
 import styles from "./analysis.module.css";
 
 export default function AnalysisPageClient() {
@@ -40,30 +40,35 @@ export default function AnalysisPageClient() {
   };
 
   return (
-    <div className={propensityStyles.propensityAccess}>
-      {step === 0 && (
-        <div className={styles.introWrap}>
-          <div className={propensityStyles.title}>
-            <h2>성향 분석 Intro</h2>
-            <button onClick={() => setStep(1)}>시작하기</button>
-          </div>
-
-          <div className={styles.introPreview}>
-            <p>▿▿▿성향 분석 실제 작업 미리보기▿▿▿</p>
-            <div>
-              <iframe src="https://dapp.quantec.co.kr/propensity/?uid=1100000409" />
+    <div className={styles.backWidth}>
+      <div>
+        {/* {step === 0 && (
+          <div className={styles.introWrap}>
+            <div className={styles.title}>
+              <h2>성향 분석 Intro</h2>
+              <button onClick={() => setStep(1)}>시작하기</button>
             </div>
           </div>
-        </div>
-      )}
+        )} */}
 
-      {step >= 1 && step <= 3 && (
-        <Question question={questions[step - 1]} onAnswer={handleAnswer} setStep={setStep} />
-      )}
+        {step >= 0 && step <= 2 && (
+          <Question
+            question={questions[step]}
+            onAnswer={handleAnswer}
+            step={step}
+            setStep={setStep}
+          />
+        )}
 
-      {(step === 4 || step === 5) && (
-        <Result step={step} answers={answers} onAgree={handleAgree} onRestart={handleRestart} />
-      )}
+        {(step === 3 || step === 4) && (
+          <Result
+            step={step}
+            answers={answers}
+            onAgree={handleAgree}
+            onRestart={handleRestart}
+          />
+        )}
+      </div>
     </div>
   );
 }
