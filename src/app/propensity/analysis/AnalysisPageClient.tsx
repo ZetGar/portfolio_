@@ -6,7 +6,7 @@ import { questions } from "@/features/propensityAnalysis/questions/data";
 import Question from "@/features/propensityAnalysis/questions/Question";
 import Result from "@/features/propensityAnalysis/results/Result";
 
-import propensityStyles from "../page.module.css";
+import propensityStyles from "../../page.module.css";
 import styles from "./analysis.module.css";
 
 export default function AnalysisPageClient() {
