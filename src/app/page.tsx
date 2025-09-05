@@ -32,15 +32,28 @@ export default function Home() {
                   <p className={styles.careerDate}>{career.type}</p>
 
                   <div className={styles.projectBox} key={`carrer_${index}`}>
-                    <h4>
-                      <Link href={`${career.contents.link}`}>
-                        {career.contents.title}
-                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 0.5H5V4.5" stroke="white" stroke-linecap="round"/>
-                            <path d="M5 0.5L0.5 5" stroke="white" stroke-linecap="round"/>
-                        </svg>
-                      </Link>
-                    </h4>
+                    <Link href={`${career.contents.link}`}>
+                      {career.contents.title}
+                      <svg
+                        width="6"
+                        height="6"
+                        viewBox="0 0 6 6"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 0.5H5V4.5"
+                          stroke="white"
+                          stroke-linecap="round"
+                        />
+                        <path
+                          d="M5 0.5L0.5 5"
+                          stroke="white"
+                          stroke-linecap="round"
+                        />
+                      </svg>
+                    </Link>
+
                     <p>{career.contents.explanation}</p>
                     <div className={styles.tabWrap}>
                       {career.contents.tag.map((tag, index) => (

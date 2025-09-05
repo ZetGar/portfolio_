@@ -7,18 +7,18 @@
   margin: 0;
   padding: 24px;
   /* background: linear-gradient(180deg, #484848, #000000); */
-  background: #1A3866;
+  background: #FCEFC9;
   box-sizing: border-box;
 }
 .childrenWrap::selection {
   /* background: rgba(160, 96, 220, 0.38); */
-  background: rgb(255, 255, 255);
-  color: #fff;
+  background: #FCEFC9;
+  color: #E3271E;
 }
 
 .childrenWrap a {
   /* padding: 8px 0; */
-  color: #DAA148;
+  color: #FCEFC9;
   font-size: 12px;
   font-weight: 800;
   text-decoration: none;
@@ -41,7 +41,7 @@
   align-items: center;
   width: 100%;
   padding: 12px 24px;
-  background-color: #00000080;
+  background-color:#E3271E;
   box-sizing: border-box;
 }
 .appTop > a > svg{

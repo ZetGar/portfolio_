@@ -30,7 +30,7 @@ export default function Page() {
         <div className={styles.appDownloadWrap}>
           {data.preview.content.map((previewDownload, index) => (
             <Link href={previewDownload} key={`preview_${index}`}>
-              {index === 0 ? "구글플레이 다운로드" : "애플스토어 다운로드"}
+              {index === 0 ? "GOOGLEPLAY 다운로드" : "APPSTORE 다운로드"}
             </Link>
           ))}
         </div>
@@ -54,7 +54,7 @@ export default function Page() {
                         <p>· {content}</p>
 
                         {c.img &&
-                          cindex === c.content.length - 1 && ( // 문장 끝나고 이미지 보여주기
+                          cindex === c.content.length - 1 && ( 
                             <div className={styles.thumbnailWrap}>
                               {c.img.map((image, imgIndex) => (
                                 <div
