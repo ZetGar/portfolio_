@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { data } from "./data/data";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -67,6 +67,7 @@ export default function SmartIndexPage() {
         )}
       </div>
 
+      {/* Lightbox */}
       {selectedImageIndex !== null && (
         <Lightbox
           open={selectedImageIndex !== null}

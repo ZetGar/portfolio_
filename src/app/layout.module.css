@@ -15,7 +15,7 @@
 }
 
 .childrenWrap a {
-  padding: 8px 0 !important;
+  /* padding: 8px 0; */
   color: #fff;
   font-size: 12px;
   font-weight: 800;
@@ -36,15 +36,21 @@
   left: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
   padding: 12px 24px;
   background-color: #00000080;
   box-sizing: border-box;
 }
+.appTop > a > svg{
+  width: 70px;
+  height: 100%;
+}
 .appTop > div {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  padding: 8px 0;
   max-width: 1000px;
 }
 .appTop > div > button {
