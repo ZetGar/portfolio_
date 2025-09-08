@@ -1,12 +1,102 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import styles from "../page.module.css";
 import { data } from "./data/data";
 
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
+import Image from "next/image";
+import Link from "next/link";
+
 export default function page() {
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+
+  const handleImageClick = (images: string[], index: number) => {
+    setSelectedImages(images);
+    setSelectedImageIndex(index);
+  };
+
   return (
     <div className={styles.page}>
       <div className={styles.title}>
         <h2>{data.title}</h2>
+      </div>
+
+      {/* {data.preview && (
+        <div className={styles.appDownloadWrap}>
+          {data.preview.content.map((previewDownload, index) => (
+            <Link href={previewDownload} key={`preview_${index}`}>
+              {index === 0 ? "GOOGLEPLAY 다운로드" : "APPSTORE 다운로드"}
+            </Link>
+          ))}
+        </div>
+      )} */}
+
+      <div className={styles.descriptionWrap}>
+        {data.description.map((desc, idx) => (
+          <div key={idx} className={styles.description}>
+            <p>{desc.title}</p>
+
+            <div>
+              {desc.content.map((c, index) => (
+                <div key={`content_${index}`} className={styles.contentWrap}>
+                  <p>{c.title}</p>
+                  <div>
+                    {c.content.map((content, cindex) => (
+                      <div
+                        key={`cindex_${cindex}`}
+                        className={styles.textAndImage}
+                      >
+                        <p>· {content}</p>
+
+                        {c.img && cindex === c.content.length - 1 && (
+                          <div className={styles.thumbnailWrap}>
+                            {c.img.map((image, imgIndex) => (
+                              <div
+                                key={`img_${imgIndex}`}
+                                className={styles.thumbnail}
+                                onClick={() =>
+                                  handleImageClick(c.img!, imgIndex)
+                                }
+                              >
+                                <Image
+                                  src={image}
+                                  alt={desc.title}
+                                  width={200}
+                                  height={200}
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                  }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        {selectedImageIndex !== null && (
+          <Lightbox
+            open={true}
+            close={() => setSelectedImageIndex(null)}
+            index={selectedImageIndex}
+            slides={selectedImages.map((img) => ({ src: img }))}
+            plugins={[Zoom]}
+          />
+        )}
       </div>
     </div>
   );

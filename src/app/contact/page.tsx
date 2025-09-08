@@ -7,7 +7,7 @@ export default function page() {
     <div className={styles.page}>
       <div>
         <div className={styles.profile}>
-          <div className={styles.img}></div>
+          {/* <div className={styles.img}></div> */}
           <div className={styles.name}>
             <h2>KIM SONG I</h2>
             <p>김송이 · Frontend Developer</p>

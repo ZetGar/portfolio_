@@ -18,47 +18,49 @@ export default function RootLayout({
         <div className={styles.appTop}>
           <Link href="/">
             <svg
-              width="19"
-              height="8"
-              viewBox="0 0 19 8"
+              width="512"
+              height="512"
+              viewBox="0 0 512 512"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M3 2L1 4H6.5L4 6.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M131 183V451.5"
+                stroke="#FCEFC9"
+                stroke-width="30"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
               <path
-                d="M5 2.5L6.5 1L8 2.5L6.5 4L5 2.5Z"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M384 52L384 317"
+                stroke="#FCEFC9"
+                stroke-width="30"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <circle
+                cx="257.5"
+                cy="255.5"
+                r="126.5"
+                stroke="#FCEFC9"
+                stroke-width="30"
               />
               <path
-                d="M12.5 1L11 2.5L12.5 4L14 2.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M37 124L480 380"
+                stroke="#FCEFC9"
+                stroke-width="30"
+                stroke-linejoin="round"
               />
               <path
-                d="M8 2.5L11 4.23205V2.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M385 248.5H255"
+                stroke="#FCEFC9"
+                stroke-width="30"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
               <path
-                d="M8 3L8 7"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13 2.5L18 2.5"
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M31 234.604C30.3386 241.647 30 248.784 30 256C30 380.816 131.184 482 256 482C345.559 482 422.949 429.906 459.525 354.367L485.572 369.405C443.753 453.9 356.662 512 256 512C114.615 512 0 397.385 0 256C0 255.132 0.00505475 254.265 0.0136719 253.399L31 234.604ZM256 0C396.076 0 509.873 112.502 511.969 252.079L481.539 270.538C481.844 265.731 482 260.884 482 256C482 131.184 380.816 30 256 30C169.738 30 94.7638 78.3281 56.6768 149.386L30.6807 134.377C73.9658 54.3556 158.635 0 256 0Z"
+                fill="#FCEFC9"
               />
             </svg>
           </Link>
