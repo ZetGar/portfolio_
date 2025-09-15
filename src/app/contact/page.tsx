@@ -13,6 +13,7 @@ export default function page() {
             <p>김송이 · Frontend Developer</p>
           </div>
           <div className={styles.link}>
+            <Link href="https://www.notion.so/2696ec8445fb80f682b4d4567609b54f?source=copy_link">Notion</Link>
             <Link href="mailto:awesde10@gmail.com">Email</Link>
             <Link href="https://github.com/ZetGar">Github</Link>
           </div>
