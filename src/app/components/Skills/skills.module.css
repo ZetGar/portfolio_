@@ -112,6 +112,16 @@
 
 }
 
+/* TABLET */
+
+@media (min-width:769px) and (max-width:1024px) {
+
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
 /* MOBILE */
 
 @media (max-width:768px) {

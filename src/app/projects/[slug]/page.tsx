@@ -117,6 +117,15 @@ export default function ProjectDetail({ params }: Props) {
           <p>{project.impact}</p>
         </section>
 
+        {/* Notion Link */}
+        {project.notion && (
+          <section className={styles.notionCta}>
+            <a href={project.notion} target="_blank" rel="noopener noreferrer" className={styles.notionButton}>
+              📝 Notion에서 상세 내용 보기
+            </a>
+          </section>
+        )}
+
         {/* Gallery */}
         {project.gallery && project.gallery.length > 0 && (
           <section className={styles.gallerySection}>

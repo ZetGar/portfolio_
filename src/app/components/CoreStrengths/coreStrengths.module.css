@@ -103,7 +103,17 @@
   line-height: 1.6;
 }
 
-/* 모바일 */
+/* TABLET */
+
+@media (min-width:769px) and (max-width:1024px) {
+
+  .grid > * {
+    flex: 0 1 calc((100% - 28px) / 2);
+  }
+
+}
+
+/* MOBILE */
 
 @media (max-width:768px) {
 

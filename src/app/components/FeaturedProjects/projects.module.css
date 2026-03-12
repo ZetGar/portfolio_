@@ -307,3 +307,23 @@
 .codeTag {
   color: #f472b6;
 }
+
+/* TABLET */
+
+@media (max-width:1024px) {
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* MOBILE */
+
+@media (max-width:768px) {
+
+  .projects {
+    padding: 80px 24px;
+  }
+
+}
