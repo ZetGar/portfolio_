@@ -43,14 +43,14 @@ export default function ProjectCard({
             {isBackend ? (
               <>
                 <span className={styles.codeLine}><span className={styles.codeKeyword}>class</span> {firstName} {'{'}</span>
-                <span className={styles.codeLine}>  <span className={styles.codeComment}>// {tech.slice(0, 3).join(' · ')}</span></span>
+                <span className={styles.codeLine}>  <span className={styles.codeComment}> {`// ${tech.slice(0, 3).join(' · ')}`}</span></span>
                 <span className={styles.codeLine}>  <span className={styles.codeKeyword}>build</span>() → <span className={styles.codeString}>success</span></span>
                 <span className={styles.codeLine}>{'}'}</span>
               </>
             ) : (
               <>
                 <span className={styles.codeLine}><span className={styles.codeKeyword}>export default</span> <span className={styles.codeFunc}>function</span> App() {'{'}</span>
-                <span className={styles.codeLine}>  <span className={styles.codeComment}>// {tech.slice(0, 3).join(' · ')}</span></span>
+                <span className={styles.codeLine}>  <span className={styles.codeComment}> {`// ${tech.slice(0, 3).join(' · ')}`}</span></span>
                 <span className={styles.codeLine}>  <span className={styles.codeKeyword}>return</span> {'<'}<span className={styles.codeTag}>{firstName}</span> /{'>'}</span>
                 <span className={styles.codeLine}>{'}'}</span>
               </>
