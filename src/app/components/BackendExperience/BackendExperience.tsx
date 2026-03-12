@@ -50,9 +50,7 @@ export default function BackendExperience() {
         </p>
 
         <div className={styles.backendGrid} ref={ref}>
-
           {experiences.map((exp, i) => (
-
             <div key={exp.title} className={styles.backendCard} style={{ '--i': i } as React.CSSProperties}>
 
               <h3>{exp.title}</h3>
@@ -66,9 +64,7 @@ export default function BackendExperience() {
                   </span>
                 ))}
               </div>
-
             </div>
-
           ))}
 
         </div>

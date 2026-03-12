@@ -18,7 +18,7 @@ export default function ProjectsPage() {
 
   const [activeFilter, setActiveFilter] = useState("all")
 
-  const projectList = Object.values(projects)
+  const projectList = Object.values(projects).sort((a, b) => Number(b.featured) - Number(a.featured))
 
   const filteredProjects =
     activeFilter === "all"
