@@ -53,6 +53,7 @@ export default function ProjectDetail({ params }: Props) {
           ← 프로젝트 목록
         </Link>
 
+
         {/* Title */}
         <h1 className={styles.title}>
           {project.title}
@@ -86,37 +87,35 @@ export default function ProjectDetail({ params }: Props) {
 
         </div>
 
-        {/* ===== CAR: Challenge / Approach / Result ===== */}
-        <div className={styles.carGrid}>
+        {/* Problem */}
+        <section className={styles.section}>
+          <h3>Problem</h3>
+          <p>{project.problem}</p>
+        </section>
 
-          {/* Challenge */}
-          <div className={`${styles.carBlock} ${styles.challenge}`}>
-            <div className={styles.carLabel}>Challenge — 어떤 과제였는가</div>
-            <p>{project.problem}</p>
-          </div>
+        {/* Solution */}
+        <section className={styles.section}>
+          <h3>Solution</h3>
+          <p>{project.solution}</p>
+        </section>
 
-          {/* Approach */}
-          <div className={`${styles.carBlock} ${styles.approach}`}>
-            <div className={styles.carLabel}>Approach — 어떻게 해결했는가</div>
-            <p>{project.solution}</p>
+        {/* Key Contributions */}
+        {project.keyContributions && project.keyContributions.length > 0 && (
+          <section className={styles.section}>
+            <h3>Key Contributions</h3>
+            <ul className={styles.contributionList}>
+              {project.keyContributions.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-            {/* Key Contributions as list */}
-            {project.keyContributions && project.keyContributions.length > 0 && (
-              <ul style={{ marginTop: 16 }}>
-                {project.keyContributions.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-
-          {/* Result */}
-          <div className={`${styles.carBlock} ${styles.result}`}>
-            <div className={styles.carLabel}>Result — 어떤 성과가 있었는가</div>
-            <p>{project.impact}</p>
-          </div>
-
-        </div>
+        {/* Impact */}
+        <section className={styles.section}>
+          <h3>Impact</h3>
+          <p>{project.impact}</p>
+        </section>
 
         {/* Gallery */}
         {project.gallery && project.gallery.length > 0 && (
