@@ -36,47 +36,66 @@ export const projects: Record<string, Project> = {
     featured: false,
     slug: "pb-customer-system",
     type: "service",
-    title: "PB 고객 관리 조회 시스템",
-    summary: "PB 고객 관리 화면에서 고객 조회 및 관리 기능을 구현한 프로젝트",
+    title: "PB 관리 시스템 — 고객 등록 자동화 및 관리 화면 개선",
+    summary: "PB 고객 계좌 개설 시 자동 등록 실패로 발생하던 반복 문의를 UI 기능으로 해결하고, Tailwind+MUI 혼재 구조를 CSS Module로 리팩토링한 프로젝트. 클라이언트 사이드 필터링·페이지네이션으로 API 수정 없이 빠른 기능 제공",
     role: "Frontend",
-    tech: ["React"],
+    tech: ["React", "Next.js", "Recoil", "MUI", "CSS Module"],
     keyContributions: [
-      "React 기반 고객 조회 및 관리 UI 구현",
-      "고객 검색 및 필터링 기능 개발",
-      "고객 데이터 조회 API 연동 및 상태 관리 구현",
-      "PB 업무 흐름에 맞는 UI 구조 설계"
+      "PB 고객 즉시 등록 기능 — 고객 정보 조회 API 연동, 등록 고객→정보 표시 / 미등록 고객→등록 UI 노출(조건부 렌더링), 상세 정보 모달 팝업 연동으로 한 화면에서 조회+등록 완결",
+      "Recoil 기반 전역 상태 관리 — 고객 계좌 정보를 atom으로 관리, 검색→상세 팝업→등록 처리 흐름에서 Props drilling 없이 상태 일관성 유지",
+      "클라이언트 사이드 데이터 처리 — useMemo 기반 최적화, 투자금액 범위별 필터링(1천만~1억 이상 5구간), 클라이언트 사이드 페이지네이션(동적 페이지 크기), Skeleton UI 로딩",
+      "UI 구조 리팩토링 (Tailwind + MUI → CSS Module) — 공통 UI만 MUI 유지(Modal, Select), 나머지 CSS Module 전환으로 스타일 충돌 해결 및 관리 구조 단순화",
+      "관리 현황 대시보드 — 관리 고객 총 현황 정보 카드, 기간별 조회(시작일/종료일 필터링), 고객 리스트 테이블(이름·연락처·생년월일·투자성향·수익률·가입일·투자금액) + 페이지네이션",
+      "장기 성능 개선 방향 검토 — 서버 사이드 필터링 도입 및 IndexedDB 기반 브라우저 캐싱 전략으로 초기 로딩 부담 분산 검토"
     ],
-    problem: "PB 업무 중 반복적으로 발생하던 고객 조회 프로세스를 효율적으로 처리할 필요가 있었습니다.",
-    solution: "고객 조회 UI 및 관리 기능을 구현하여 업무 효율을 개선했습니다.",
-    impact: "PB 업무에서 고객 조회 및 관리 프로세스가 간소화되었습니다.",
+    problem: "PB 고객 계좌 개설 시 고객 정보가 자동 등록되어야 했지만, 특정 상황에서 등록이 누락되어 PB 화면에서 고객을 조회할 수 없는 문제가 반복되었습니다. PB는 고객 정보를 확인하기 위해 별도 문의를 거쳐야 했고, 등록 여부 확인→수정 처리 과정이 반복되어 업무 처리 시간이 증가했습니다. 또한 Tailwind+MUI 혼합 사용으로 스타일 충돌·버튼 크기 불일치 문제가 있었습니다.",
+    solution: "PB 화면에서 고객 정보 조회→미등록 고객 즉시 등록이 한 화면에서 가능하도록 기능을 구현했습니다. Recoil atom으로 고객 검색 상태를 전역 관리하고, API 수정 없이 프론트엔드에서 useMemo 기반 필터링·페이지네이션·검색을 처리하여 빠르게 기능을 제공했습니다. 스타일 구조는 공통 UI만 MUI 유지하고 나머지를 CSS Module로 전환하여 충돌을 해결했습니다.",
+    impact: "PB 고객 문의 약 90% 감소. 별도 시스템 확인 없이 한 화면에서 고객 조회+등록이 가능해져 반복적인 확인 업무가 대폭 줄었습니다. API 변경 없이 프론트엔드 구현만으로 빠른 기능 제공이 가능했고, 단기 해결(클라이언트 사이드 처리)과 장기 개선(IndexedDB 캐싱)을 함께 고려하는 기술적 의사결정 경험을 쌓았습니다.",
+    notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=2696ec8445fb807880a4c4bcea52372e&pm=s",
+    github: null,
+    thumbnail: "/img/management/regCusList_1.png",
+    detailPath: "/aiadpb",
+    gallery: [
+      {
+        title: "PB 고객 관리 · 등록",
+        description: "고객 조회→미등록 고객 즉시 등록, 투자금액별 필터링, 관리 현황 대시보드를 한 화면에서 처리하는 PB 관리 시스템입니다.",
+        images: ["/img/management/regCusList_1.png", "/img/management/regCusList_2.png", "/img/management/regCusList_3.png", "/img/management/regCusList_4.png", "/img/management/regCusList_5.png", "/img/management/regCusList_6.png", "/img/management/regCusList_7.png"]
+      },
+      {
+        title: "PB 관리 현황 조회",
+        description: "관리 고객 총 현황 정보 카드, 기간별 조회, 고객 리스트 테이블 등 PB 대시보드 화면입니다.",
+        images: ["/img/pb/home/pb_1.png", "/img/pb/home/pb_2.png", "/img/pb/home/pb_3.png", "/img/pb/home/pb_4.png"]
+      }
+    ]
+  },
+
+  stockDiagnosis: {
+    featured: false,
+    slug: "stock-diagnosis",
+    type: "service",
+    title: "관심종목진단 — 다단계 AI 자산 상담 플로우 설계 및 구현",
+    summary: "PB가 고객 보유 종목을 진단하고 AI 기반 포트폴리오 최적화를 수행하는 9단계 상담 플로우(종목 검색→분석→스타일 진단→AI 최적화→비교→리포트)를 단일 화면에서 설계·구현한 프로젝트. 3가지 진입 경로 통합, 실시간 비즈니스 로직 검증, next/dynamic 코드 스플리팅 적용",
+    role: "Frontend",
+    tech: ["React", "Next.js", "TypeScript", "Recoil", "CSS Module"],
+    keyContributions: [
+      "3가지 진입 경로 통합 설계 — 고객 ID 기반(보유종목 API)/외부 연동 시스템(종목코드 배열 findIndex+trim 매칭)/데이터 표출 모드(기존 상담 결과 복원)를 초기화 단계에서 분기하고 이후 UI 로직은 동일 assetList 상태로 통합",
+      "종목 선택 실시간 비즈니스 로직 검증 — 최대 종목 수 N개 제한, 최소보유비중 합계 상한 초과 불가, 개별 하한 미만 입력 차단, 비중 미입력 시 자동 기본값 적용. 체크 해제 시 비중 0.00 리셋, 비중 입력 클릭 시 자동 체크 연동",
+      "비중 입력 4단계 유효성 파이프라인 — 입력(정규식 숫자 검증) → 개별 상한 검증 → 합계 검증 → 상태 업데이트 / blur 시 0%이면 기본값 복원 + toFixed(2) 소수점 포맷팅",
+      "종목 분석 + 스타일 진단 — 체크 종목 코드·비중 정리 후 분석 API 호출, 4가지 투자 스타일 요소(국가/규모/가치/긍정성) 선택 UI, 선택 결과 기반 AI 비중 최적화 API 호출",
+      "AI 추천 vs 고객 선택 비교 모달 — 두 포트폴리오를 나란히 비교, 라디오 버튼 전환, 재분석 시 확인 팝업으로 실수 방지, Recoil 전역 로딩 상태 관리",
+      "상담 라이프사이클 완결 — 임시저장 → 고객 링크 전송(전송 후 화면 전체 disabled로 중복 방지) → 7종 리포트 패키지 생성. 9단계 버튼 상태 자동 전환으로 순서 강제",
+      "next/dynamic SSR:false로 6개 컴포넌트 동적 임포트 — 9단계 플로우에서 초기 번들 크기 최소화",
+      "UX 마이크로인터랙션 — 종목명 scrollWidth>clientWidth 감지→말줄임+Tooltip 자동 표시(5초 자동 닫힘), 포트폴리오 생성 후 grayscale(0.7) 시각적 비활성화"
+    ],
+    problem: "종목 검색→체크리스트→분석→스타일 진단→AI 최적화→비교→저장→전송→리포트까지 9단계 상담 플로우를 하나의 화면에서 순차적으로 진행해야 했고, 각 단계마다 API 호출·상태 전환·버튼 활성화/비활성화 제어가 필요했습니다. 동일 화면에 고객 ID/외부 연동 시스템/기존 상담 데이터 3가지 진입 경로가 공존하여 분기 처리가 복잡했고, 종목 수 제한·비중 합계 상한 등 금융 도메인 비즈니스 규칙을 프론트엔드에서 실시간 검증해야 했습니다.",
+    solution: "3가지 진입 경로를 초기화 단계에서 분기하고 이후 동일한 assetList 상태로 수렴시켜 UI 로직을 통합했습니다. 종목 선택 시 비즈니스 규칙을 실시간 검증하고, 비중 입력은 입력→검증→보정→포맷팅 4단계 파이프라인으로 잘못된 입력을 원천 차단했습니다. 9단계 버튼 상태를 자동 전환하여 순서를 강제하고, next/dynamic으로 6개 컴포넌트를 코드 스플리팅하여 초기 번들을 최소화했습니다. AI 추천 vs 고객 선택 비교 모달로 PB의 근거 기반 상담을 지원했습니다.",
+    impact: "복잡한 9단계 상담 플로우를 단일 화면에서 완결하는 UX를 설계·구현했습니다. 단계별 버튼 상태 자동 전환과 실시간 비즈니스 로직 검증으로 PB의 조작 실수를 원천 방지하고, 3가지 진입 경로를 통합하여 분기 복잡도를 진입점에 집중시킨 설계 경험을 쌓았습니다. 금융 도메인에서 방어적 UX 설계의 실무적 가치를 체감했습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=2696ec8445fb807880a4c4bcea52372e&pm=s",
     github: null,
     thumbnail: "/img/management/regCusList_1.png",
     detailPath: "/aiadpb"
   },
 
-  managementStatusSystem: {
-    featured: false,
-    slug: "management-status-system",
-    type: "service",
-    title: "관리 현황 조회 시스템",
-    summary: "관리 고객의 상태를 조회할 수 있는 내부 관리 시스템 개발",
-    role: "Frontend",
-    tech: ["React"],
-    keyContributions: [
-      "관리 고객 상태 조회 UI 개발",
-      "여러 시스템 데이터를 통합하여 한 화면에서 조회 가능하도록 구현",
-      "React 기반 데이터 상태 관리 및 렌더링 최적화",
-      "관리 업무 효율 개선을 위한 UI 구조 설계"
-    ],
-    problem: "관리 고객의 상태를 확인하기 위해 여러 시스템을 조회해야 하는 문제가 있었습니다.",
-    solution: "관리 현황을 한 화면에서 조회할 수 있는 관리 UI를 구현했습니다.",
-    impact: "관리 업무 효율이 개선되었습니다.",
-    notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=2696ec8445fb80659b4cd0b7a32cd775&pm=s",
-    github: null,
-    thumbnail: "/img/pb/home/pb_1.png",
-    detailPath: "/aiadpb"
-  },
 
   skeletonLoading: {
     featured: false,
@@ -107,27 +126,28 @@ export const projects: Record<string, Project> = {
     featured: true,
     slug: "strategy-market-detail",
     type: "ux",
-    title: "전략마켓 — 대규모 금융 데이터 비교 UX 및 서비스 전면 개선",
-    summary: "Tailwind+MUI 혼재 구조를 CSS Module로 리팩토링하고, Sticky Header/Column 이중 구조 테이블과 Highcharts 인라인 차트, 비동기 Skeleton UI 로딩을 적용하여 대규모 금융 데이터 비교 UX를 전면 개선한 프로젝트",
+    title: "금융 투자 플랫폼 (Part 1) — 전략마켓 대규모 데이터 비교 UX 개선 및 서비스 고도화",
+    summary: "Tailwind+MUI 혼재 구조를 CSS Module로 리팩토링하고, Sticky Header/Column 이중 구조 테이블과 Highcharts 인라인 차트, 비동기 Skeleton UI 로딩, 기간별 캐싱, 벤치마크 비교, 차트 공통 컴포넌트화를 적용하여 증권사 투자 전략 비교 서비스의 UX를 전면 개선한 프로젝트",
     role: "Frontend",
     tech: ["React", "Next.js", "TypeScript", "Highcharts", "Tailwind", "MUI", "CSS Module"],
     keyContributions: [
-      "Tailwind + MUI 혼재 스타일을 CSS Module 기반으로 전면 리팩토링 — Mobile/PC 코드 통합으로 중복 제거",
-      "Sticky Header/Column 이중 구조 테이블 직접 구현 — ::before 가상 요소로 배경 깨짐 방지, z-index 3단계 레이어링(헤더:5, 바디전략명:1, 교차셀:10), 좌우 scrollBy 버튼 동적 표시",
-      "Chrome 업데이트 이후 Sticky 렌더링 방식 변경 대응 — 어긋나는 컬럼과 비정상 스크롤 문제를 CSS 구조 재정비로 해결",
-      "Highcharts 미니 Area 차트를 테이블 행에 인라인 렌더링 — getMiniAreaChartOptions() 유틸리티로 옵션 표준화, No Data fallback 처리",
-      "차트 데이터 캐싱 — 이미 로딩된 차트 데이터를 캐싱하여 탭 전환·재방문 시 API 재호출 없이 즉시 렌더링, 불필요한 네트워크 요청 제거로 성능 최적화",
-      "비동기 데이터 로딩 + Skeleton UI — 텍스트 먼저 렌더링 후 차트 데이터 점진적 로딩으로 체감 속도 개선",
+      "CSS 구조 리팩토링 (Tailwind + MUI → CSS Module) — Mobile/PC 분리 코드를 통합하여 중복 제거, 상품 유형별(일반/세제혜택) 렌더링 분기 단순화",
+      "Sticky Header/Column 이중 구조 테이블 직접 구현 — ::before 가상 요소로 배경 깨짐 방지, z-index 3단계 레이어링(헤더:5, 바디전략명:1, 교차셀:10), 좌우 scrollBy 버튼 동적 표시, 전략 카테고리별 색상 배지 자동 매핑",
+      "Chrome 업데이트 이후 Sticky 렌더링 방식 변경 대응 — 브라우저 동작 변화를 분석하고 CSS 구조 재정비로 컬럼 어긋남·비정상 스크롤 해결",
+      "Highcharts 미니 Area 차트를 테이블 행에 인라인 렌더링 — getMiniAreaChartOptions() 유틸리티로 옵션 표준화, tooltip 포맷 수정, No Data fallback, 수익률 색상 자동 매핑(양수:빨강/음수:파랑)",
+      "차트·미니차트 공통 컴포넌트화 — 전략마켓과 내 자산 페이지에서 각각 개별 구현되어 있던 차트를 재사용 가능한 공통 컴포넌트로 통합, 디자인 및 데이터 구조 통일",
+      "비동기 데이터 로딩 + Skeleton UI — 텍스트/테이블 데이터와 차트 데이터를 별도 API로 분리 호출, 텍스트 먼저 렌더링 후 차트 점진적 로딩으로 체감 속도 개선",
+      "전략 상세 페이지 구현 — 좌우 분할 레이아웃(좌: DropDown 아코디언 기본정보/자산구성/운용계획, 우: 기간수익률+위험지표+라인 차트), format 분기(currency/percent/performance) 자동 포맷팅",
+      "차트 데이터 기간별 캐싱 — 6개월/1년/2년/3년/누적 탭 전환 시 캐시 히트로 네트워크 비용 0, 같은 탭 재클릭 시 즉시 렌더링",
+      "공시기간 기반 동적 탭 생성 + 벤치마크 비교 — 공시기간에 따라 차트 기간 탭 자동 생성, 벤치마크 수익률(KOSPI, KRX300 등)을 전략 수익률과 동일 차트에 오버레이 렌더링",
       "useStrategyTable 커스텀 Hook — useMemo 기반 필터→검색→정렬 3단계 파이프라인, strategyFilter 콜백으로 AI추천/전체전략 테이블을 Hook 하나로 관리",
       "TableUpdater 클래스로 API 응답 데이터 → UI 테이블 데이터 변환 표준화 — API 응답 구조와 UI 표시 형식을 분리하여 각각 독립적으로 변경 가능한 설계",
-      "서버 데이터 기반 동적 탭 생성 — 탭 구성을 하드코딩이 아닌 API 응답 데이터로 동적 생성하여 상품 유형 추가·변경 시 코드 수정 없이 대응",
-      "벤치마크(KOSPI, KRX300 등) 비교 차트 구현 — 전략 수익률과 시장 지수를 동일 차트에서 비교할 수 있는 금융 데이터 시각화",
       "설명 텍스트 Key 기반 서버 관리 — Node.js에 설명 데이터 저장, Key로 조회하여 팝업 표시. 코드 수정 없이 법적 고지 문구 변경 가능",
-      "iOS/Android/WebView 크로스 플랫폼 UI 검증 — 모바일 팀과 협업하여 환경별 차이 해결"
+      "iOS/Android/WebView 크로스 플랫폼 UI 검증 — 모바일 팀과 협업, 상단 계좌 클릭 시 UI 밀림 문제를 position 기반 레이아웃 구조 개선으로 해결"
     ],
-    problem: "Tailwind과 MUI가 혼용된 스타일 구조와 Mobile/PC 코드 중복으로 유지보수가 어려웠고, 규제 대응으로 모든 데이터를 공개해야 하면서 가로 스크롤 시 전략명이 사라지는 가독성 문제가 발생했습니다.",
-    solution: "CSS Module 기반으로 스타일을 재구성하고, Sticky Header/Column 이중 구조와 Highcharts 인라인 차트, Skeleton UI 비동기 로딩을 적용하여 대규모 금융 데이터의 비교 UX를 전면 개선했습니다.",
-    impact: "데이터 비교 UX에서 스크롤, 레이어링, 성능, 크로스 플랫폼까지 고려하는 개발 역량을 확보했습니다. CSS position: sticky의 가로+세로 동시 적용 시 렌더링 이슈와 브라우저 업데이트 대응 경험을 쌓았습니다.",
+    problem: "Tailwind과 MUI가 혼용된 스타일 구조에서 동일 UI가 서로 다른 방식으로 구현되어 스타일 관리가 어려웠고, Mobile/PC 코드가 분리되어 동일 기능 코드가 중복되는 구조였습니다. 법적 요구사항에 따라 모든 상품 데이터를 공개해야 하면서 테이블이 viewport를 초과했고, 가로 스크롤 시 전략명이 사라져 어떤 전략의 데이터인지 확인할 수 없었습니다. 차트 데이터를 한 번에 로딩하면 초기 렌더링이 지연되었고, 전략마켓과 내 자산 페이지에서 차트가 각각 개별 구현되어 디자인이 불일치했습니다.",
+    solution: "스타일 구조를 CSS Module 기반으로 전면 재구성하고 Mobile/PC 코드를 통합했습니다. Sticky Header/Column 이중 구조로 가로·세로 스크롤 시 핵심 정보가 항상 보이도록 설계하고, Highcharts 미니 차트를 테이블 행에 인라인 렌더링하여 텍스트 수치와 시각적 추세를 동시에 비교할 수 있게 했습니다. 차트 데이터는 비동기로 분리 호출하여 텍스트 먼저 표시하고, 기간별 캐싱으로 탭 전환 시 네트워크 비용을 0으로 줄였습니다. 분산된 차트를 공통 컴포넌트로 통합하고, 공시기간 기반 동적 탭과 벤치마크 비교 차트를 구현했습니다.",
+    impact: "대규모 금융 데이터 환경에서 스크롤, 레이어링, 성능, 크로스 플랫폼까지 고려하는 개발 역량을 확보했습니다. CSS position: sticky의 가로+세로 동시 적용 시 렌더링 이슈, Chrome 업데이트 대응, Highcharts 인라인 렌더링과 공통 컴포넌트 통합, 비동기 로딩+캐싱 조합 성능 최적화, 모바일 팀과의 크로스 플랫폼 UI 검증 경험을 쌓았습니다.",
     notion: "https://www.notion.so/2696ec8445fb805f8025eb49619363ac?v=2696ec8445fb8015b06f000c029398f6&p=26a6ec8445fb8003886cfb7262233070&pm=s",
     github: null,
     thumbnail: "/img/cs/detail/cs_3.png",
@@ -144,6 +164,31 @@ export const projects: Record<string, Project> = {
         images: ["/img/cs/market/cs_1.png", "/img/cs/market/cs_2.png", "/img/cs/market/cs_3.png", "/img/cs/market/cs_4.png", "/img/cs/market/cs_5.png", "/img/cs/market/cs_6.png", "/img/cs/market/cs_7.png", "/img/cs/market/cs_8.png"]
       }
     ]
+  },
+
+  strategyMarketArchitecture: {
+    featured: false,
+    slug: "strategy-market-architecture",
+    type: "ux",
+    title: "금융 투자 플랫폼 (Part 2) — 내자산 · 데이터 정규화 아키텍처 설계",
+    summary: "BFF 부재 환경에서 프론트엔드 데이터 정규화 클래스(TableUpdater, ChartData)와 커스텀 Hook(useStrategyTable)을 직접 설계하여 API-UI 분리 계층을 구축하고, 4계층 금융 데이터(계좌→포트폴리오→전략→종목)를 TypeScript 타입 시스템으로 모델링한 프로젝트",
+    role: "Frontend",
+    tech: ["React", "Next.js", "TypeScript", "Highcharts", "CSS Module"],
+    keyContributions: [
+      "TableUpdater 클래스 — BFF 없는 환경에서 프론트엔드 단 데이터 정규화 계층 직접 설계. 2중 헤더 구조(그룹 헤더 colSpan/rowSpan + 세부 컬럼 sortKey 매핑), updateTableBody()로 API 응답을 수익률 9개+위험지표 4개+운용정보 4개 총 17개 필드로 변환, null 안전 처리",
+      "ChartData 클래스 — raw 차트 데이터를 Highcharts series 형식으로 변환하는 캡슐화 클래스. x(날짜 문자열)→timestamp 변환, 차트 라이브러리 의존을 클래스 내부로 격리",
+      "useStrategyTable 커스텀 Hook — useMemo 기반 필터→검색→정렬 3단계 메모이제이션 파이프라인, strategyFilter 콜백으로 'AI 추천 전략'과 '전체 전략' 두 테이블을 Hook 하나로 관리, useState 초기화 함수로 인스턴스 재생성 방지",
+      "내자산 4계층 자산 관리 시스템 — 계좌 메인(리스트·투자 가능 금액·전체 손익·일별 수익률 차트) → 포트폴리오 상세(자산구성·운용정보·수익률 차트) → 전략 상세(성과·종목 보유 현황·리밸런싱 내역)",
+      "TypeScript 타입 시스템 설계 — 700줄+ 인터페이스로 금융 도메인 모델링(전략 280줄, 포트폴리오 마켓 95줄, 내자산 231줄, 테이블 구조 100줄), 인터페이스 상속으로 4계층 데이터 구조를 컴파일 타임에 검증",
+      "고객용 서비스 + PB 관리자 서비스 양쪽에서 동일한 데이터 정규화 클래스와 Hook을 공유하여 크로스 프로젝트 코드 일관성 확보"
+    ],
+    problem: "백엔드에서 BFF 계층 없이 raw API 응답이 프론트엔드로 그대로 전달되는 구조였습니다. UI에 맞게 가공된 데이터가 아닌 원시 데이터를 컴포넌트에서 직접 참조하고 있어 API 스펙 변경 시 여러 컴포넌트를 동시에 수정해야 했습니다. 전략마켓의 두 테이블이 동일한 필터링·검색·정렬 로직을 각각 구현하는 코드 중복도 있었고, 내자산 페이지는 계좌→포트폴리오→전략→종목의 4계층 데이터 구조를 하나의 화면에서 탐색해야 하는 복잡성이 있었습니다.",
+    solution: "프론트엔드 단에서 BFF 역할을 수행하는 정규화 계층을 직접 설계했습니다. TableUpdater 클래스로 API 응답을 17개 필드의 정규화된 테이블 데이터로 변환하고, ChartData 클래스로 차트 라이브러리 의존을 캡슐화했습니다. useStrategyTable Hook으로 필터→검색→정렬 파이프라인을 단일화하여 strategyFilter 콜백만 다르게 전달하면 여러 테이블을 하나의 Hook으로 관리할 수 있게 했습니다. 4계층 금융 데이터는 TypeScript 인터페이스 상속으로 타입 안전하게 모델링했습니다.",
+    impact: "API 스펙 변경 시 TableUpdater만 수정하면 UI 코드에 영향이 없는 변경에 강한 구조를 확립했습니다. 고객용과 PB 관리자 서비스 양쪽에서 동일한 정규화 계층을 공유하여 코드 일관성을 확보했습니다. BFF 없는 환경에서 프론트엔드가 직접 데이터 아키텍처를 설계하여 백엔드 역할 공백을 해결한 경험, 700줄+ TypeScript 타입 시스템으로 금융 도메인을 모델링한 경험을 쌓았습니다.",
+    notion: "https://www.notion.so/2696ec8445fb805f8025eb49619363ac?v=2696ec8445fb8015b06f000c029398f6&p=26a6ec8445fb8003886cfb7262233070&pm=s",
+    github: null,
+    thumbnail: "/img/cs/market/cs_1.png",
+    detailPath: "/aiadcs"
   },
 
   toalgoWeb: {
@@ -268,27 +313,29 @@ export const projects: Record<string, Project> = {
     featured: false,
     slug: "kb-account-internalization",
     type: "ux",
-    title: "계좌개설 내재화 (증권사)",
-    summary: "증권사 계좌개설 프로세스를 개선하여 사용자 경험을 개선한 프로젝트",
+    title: "계좌개설 내재화 — Zustand 기반 11단계 플로우 상태 관리 및 약관 시스템 설계",
+    summary: "증권사 비대면 계좌개설을 앱 내 WebView로 내재화하면서, Zustand 기반 도메인별 8개 Store 설계, react-pdf PDF 약관 뷰어(캐싱·스크롤 감지), 4가지 형식(PDF/HTML/텍스트/동적HTML) 통합 약관 시스템을 구현한 프로젝트",
     role: "Frontend",
-    tech: ["React", "JavaScript"],
+    tech: ["React", "Next.js", "TypeScript", "Zustand", "react-pdf"],
     keyContributions: [
-      "React 기반 계좌개설 UI 컴포넌트 개발",
-      "계좌개설 단계별 사용자 입력 흐름 설계",
-      "기존 앱·웹 중복 입력 문제를 해결하기 위한 UX 구조 개선",
-      "사용자 이탈을 줄이기 위한 계좌개설 프로세스 단순화"
+      "Zustand 기반 도메인별 8개 Store 설계 — SMS 인증·고객 정보·은행 계좌·ARS 인증·약관 동의·주소 등 독립 Store, 파생 상태(isEmptyAgree, isEmptyPhone) 패턴으로 유효성 검증을 Store 내부에서 완결, getState() 직접 호출로 비동기 로직 안정 접근",
+      "PDF 약관 뷰어 — fetch→arrayBuffer→Int8Array→File 변환 로드, Store 기반 PDF 캐싱(재진입 시 재다운로드 방지), numPages 기반 멀티페이지 동적 렌더링, pageInfoRef로 각 페이지 렌더 완료 추적→전체 완료 시 스피너 해제",
+      "스크롤 끝 감지 — scrollHeight-scrollTop<=clientHeight+10 비교로 약관 열람 완료 감지→동의 버튼 활성화, 1페이지 PDF는 즉시 활성화 예외 처리",
+      "4가지 형식 통합 약관 뷰어 — type 필드로 PDF/HTML iframe/텍스트/srcDoc(서버 동적 HTML) 자동 분기, checkmap()으로 필수(essential)/개별(url) 자동 분류, 전체 동의 체크박스",
+      "약관 계좌 유형별 필터링 — 위탁(consignment)/연금(pension)/공통(common) 약관 자동 필터, 2depth 하위 약관 목록 구조 지원",
+      "선언적 페이지 네비게이션 (선임 협업) — 11개 페이지를 배열(KBACCOUNT)로 선언적 정의, nextPage(page, subPage) 2계층 네비게이션, 본인 인증 6단계 stepIdx 순차 진행, 이어하기 기능(4일 이내)"
     ],
-    problem: "기존 계좌개설 프로세스는 단계가 복잡하고 앱에서 입력한 정보를 웹에서 다시 입력해야 하는 불편함이 존재했습니다.",
-    solution: "계좌개설 프로세스를 단순화하고 UI/UX를 개선하여 사용자 흐름을 간소화했습니다.",
-    impact: "계좌개설 단계 이탈률을 감소시키고 사용자 경험을 개선했습니다.",
+    problem: "11단계 계좌개설 플로우(약관 동의→본인인증→신분증→주소→이메일→고객정보→비밀번호→금융기관인증→주문대리인→ARS→완료)에서 SMS·고객정보·은행계좌·ARS·약관·주소 등 서로 다른 도메인의 상태를 관리해야 했습니다. 약관 15종 이상이 PDF/외부HTML/텍스트/서버동적HTML 4가지 형식으로 혼재되어 있었고, 금융 규제상 약관을 끝까지 스크롤해야 동의 버튼이 활성화되는 요구사항이 있었습니다.",
+    solution: "Zustand로 도메인별 8개 독립 Store를 설계하고, 파생 상태 패턴으로 유효성 검증을 Store 내부에서 완결했습니다. react-pdf 기반 PDF 뷰어에 캐싱·멀티페이지 렌더 추적·스크롤 끝 감지를 구현하여 규제 요구사항을 충족했습니다. 약관 데이터의 type 필드 하나로 4가지 형식을 자동 분기하는 통합 뷰어를 설계하여, 새 약관 추가 시 데이터만 추가하면 되는 확장 가능한 구조를 만들었습니다.",
+    impact: "11단계 복잡한 금융 프로세스의 상태를 도메인별로 체계 관리하는 설계 경험을 쌓았습니다. PDF 스크롤 감지+캐싱으로 금융 규제를 충족하면서 UX를 개선했고, 4가지 형식 통합 약관 시스템으로 약관 15종+를 타입 하나로 관리하는 확장 가능한 구조를 확립했습니다. 선임 개발자와 협업하며 선언적 UI 아키텍처(데이터 기반 페이지 정의) 패턴을 학습했습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=26a6ec8445fb801b9629eb8837abbd9f&pm=s",
     github: null,
     thumbnail: "/img/account/account_6.png",
     detailPath: "/kbaccount",
     gallery: [
       {
-        title: "유지보수 및 고도화",
-        description: "공통 컴포넌트 구현, 전체 동의/개별 input 연동, OS별 웹뷰 대응 방식의 차이를 경험하며 앱 개발자들과의 소통 능력도 향상시켰습니다.",
+        title: "계좌개설 내재화 UI",
+        description: "11단계 계좌개설 플로우, PDF 약관 뷰어, Zustand 기반 상태 관리를 적용한 비대면 계좌개설 화면입니다.",
         images: ["/img/account/account_1.png", "/img/account/account_2.png", "/img/account/account_3.png", "/img/account/account_4.png", "/img/account/account_5.png", "/img/account/account_6.png", "/img/account/account_7.png", "/img/account/account_8.png", "/img/account/account_9.png", "/img/account/account_10.png"]
       }
     ]
