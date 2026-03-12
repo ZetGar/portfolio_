@@ -1,0 +1,381 @@
+# 공통 예외 처리 구조 개선 및 오류 코드 체계 표준화
+
+## 프로젝트 개요
+
+기존 시스템에서는 **예외 처리 로직이 분산**되어 있어 API 오류 응답 형식이 일관되지 않았고, 오류 코드 체계도 명확하게 정리되어 있지 않은 문제가 있었습니다.
+
+이로 인해 다음과 같은 문제가 발생했습니다:
+- **API 오류 응답 형식 불일치** — 클라이언트에서 오류 처리 로직 파편화
+- **디버깅 어려움** — 오류 발생 시 원인 추적에 과도한 시간 소요
+- **오류 코드 관리 어려움** — 명명 규칙 불일치, HTTP 상태 코드와의 연결 불명확
+
+이를 해결하기 위해 **`@ControllerAdvice` 기반의 공통 예외 처리 구조를 설계하고, `ErrorCode` enum 체계를 재정비하여 REST API 오류 응답을 표준화**했습니다.
+
+### 사용 기술
+
+| 분류 | 기술 |
+|------|------|
+| Language | Java 8 |
+| Framework | Spring MVC 5.3.x (`@ControllerAdvice`, `@ExceptionHandler`) |
+| Library | Lombok (`@Getter`, `@Slf4j`), Jackson (`@JsonFormat`) |
+| Design Pattern | **Global Exception Handler 패턴**, **Error Code Enum 패턴**, **DTO 패턴** |
+| Architecture | RESTful API, MVC 아키텍처 |
+
+---
+
+## 문제 상황
+
+### 1. 오류 코드 체계 정리 필요
+
+기존 `ErrorCode` enum은:
+- 명명 규칙이 통일되지 않았고 (접두어 없이 숫자 코드만 사용)
+- HTTP 상태 코드와의 매핑이 명확하지 않아 코드 의미 파악이 어려웠습니다.
+
+### 2. API 오류 응답 형식 불일치
+
+API 오류 발생 시 `ModelAndView`를 반환하거나, 예외별로 응답 형식이 달라 **클라이언트에서 일관된 오류 처리가 불가능**한 상태였습니다.
+
+### 3. 예외 처리 로직 분산
+
+각 Controller/Service에서 개별적으로 예외를 처리하고 있어 **유지보수성과 디버깅 효율이 크게 저하**되는 문제가 있었습니다.
+
+---
+
+## 기술적 구현
+
+### 1. ErrorCode 체계 정리 — Enum 기반 오류 코드 관리
+
+> **핵심**: `HttpStatus`와 `ErrorCode`를 1:N 매핑하여, HTTP 상태 코드 기준으로 오류 코드를 체계적으로 분류
+
+**Before (개선 전)**
+```java
+// 명명 규칙 불일치, HttpStatus 매핑 없음
+ERROR_101("101", "요청 파라미터 검증에 실패하였습니다."),
+ERROR101("101", "..."),
+code_101("101", "..."),
+```
+
+**After (개선 후)**
+```java
+@Getter
+public enum ErrorCode {
+
+    // --- 400 BAD_REQUEST ---
+    SYSTEM_101(HttpStatus.BAD_REQUEST, "101", "요청 파라미터 검증에 실패하였습니다."),
+    SYSTEM_102(HttpStatus.BAD_REQUEST, "102", "필수 요청 정보가 누락되었습니다."),
+    // ... (400 계열 오류 코드)
+
+    // --- 401 UNAUTHORIZED ---
+    SYSTEM_107(HttpStatus.UNAUTHORIZED, "107", "로그인 정보를 확인할 수 없습니다."),
+
+    // --- 404 NOT_FOUND ---
+    SYSTEM_404(HttpStatus.NOT_FOUND, "404", "요청하신 리소스를 찾을 수 없습니다."),
+
+    // --- 500 INTERNAL_SERVER_ERROR ---
+    SYSTEM_INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "5000", 
+        "서비스 처리 중 예기치 않은 오류가 발생했습니다."),
+    // ... 100개 이상의 비즈니스 오류 코드 (HttpStatus 기준 그룹핑)
+
+    // --- 503 SERVICE_UNAVAILABLE ---
+    SYSTEM_307(HttpStatus.SERVICE_UNAVAILABLE, "307", "서비스 일시 중단 중입니다.");
+
+    private final HttpStatus status;
+    private final String code;
+    private final String message;
+
+    ErrorCode(HttpStatus status, String code, String message) {
+        this.status = status;
+        this.code = code;
+        this.message = message;
+    }
+}
+```
+
+> **강조 포인트**
+> - `SYSTEM_` 접두어로 **명명 규칙 통일** → 검색성·가독성 향상
+> - `HttpStatus` 기준 **그룹핑** (400, 401, 404, 405, 500, 503) → 오류 성격을 코드만으로 즉시 파악 가능
+> - **100개 이상의 비즈니스 오류 코드**를 체계적으로 관리
+
+---
+
+### 2. REST API 오류 응답 표준화 — ErrorResponse DTO
+
+> **핵심**: 모든 API 오류 응답을 **단일 DTO 구조**로 통일하여 클라이언트와의 API 계약 명확화
+
+```java
+@Getter
+public class ErrorResponse {
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, 
+                pattern = "yyyy-MM-dd HH:mm:ss", 
+                timezone = "Asia/Seoul")
+    private final LocalDateTime timestamp = LocalDateTime.now();
+    private final String errorCode;
+    private final String message;
+
+    public ErrorResponse(String errorCode, String message) {
+        this.errorCode = errorCode;
+        this.message = message;
+    }
+}
+```
+
+**표준화된 오류 응답 예시:**
+```json
+{
+    "timestamp": "2026-03-12 13:20:50",
+    "errorCode": "101",
+    "message": "요청 파라미터 검증에 실패하였습니다."
+}
+```
+
+> **강조 포인트**
+> - `@JsonFormat`으로 **타임스탬프 직렬화 형식 통일** (Asia/Seoul 타임존 명시)
+> - 모든 API 에러가 `{ timestamp, errorCode, message }` **3-field 구조**로 통일
+> - 불변 객체 설계 (`final` 필드 + 생성자 주입)
+
+---
+
+### 3. GlobalExceptionHandler 개선 — @ControllerAdvice 기반 중앙 집중 예외 처리
+
+> **핵심**: `@ControllerAdvice` + `@ExceptionHandler`로 **애플리케이션 전역 예외를 단일 지점에서 처리**
+
+```java
+@Slf4j
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    // 1. 비즈니스 예외 처리 — GlobalException
+    @ExceptionHandler(GlobalException.class)
+    protected ModelAndView handleGlobalException(GlobalException e, 
+                                                  HttpServletRequest req) {
+        log.error("requestURL : {}, errorCode : {}, errorMessage : {}", 
+                  req.getRequestURL(), e.getCode(), e.getMessage());
+        
+        if (e.getCauseException() != null) {
+            log.error("cause exception detail : [{}] {}", 
+                      e.getCauseException().getClass().getName(),
+                      e.getCauseException().getMessage());
+        }
+
+        // dynamicMessagePart를 활용한 동적 메시지 구성
+        ErrorCode errorCode = e.getErrorCode();
+        String displayMessage = errorCode.getMessage();
+        if (e.getDynamicMessagePart() != null && !e.getDynamicMessagePart().isEmpty()) {
+            displayMessage += " (" + e.getDynamicMessagePart() + ")";
+        }
+
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("resultCd", e.getCode());
+        mv.addObject("resultMsg", displayMessage);
+        mv.setViewName("common/error");
+        return mv;
+    }
+
+    // 2. 응답 예외 처리 — ResponseException
+    @ExceptionHandler(ResponseException.class)
+    public Object handleResponseException(ResponseException e, 
+                                           HttpServletRequest req) {
+        log.error("requestURL : {}", req.getRequestURL());
+        // ... ErrorCode 기반 표준 응답 생성
+    }
+}
+```
+
+> **강조 포인트**
+> - `@ControllerAdvice`로 **전역 예외 처리 로직 중앙화** → 각 Controller에서 try-catch 제거
+> - **예외 타입별 세분화된 핸들러** ([GlobalException](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalException.java#5-74), [ResponseException](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/ResponseException.java#9-63))
+> - **요청 URL + 오류 코드 + 메시지**를 함께 로깅하여 디버깅 정보 강화
+> - `dynamicMessagePart` 기반 **동적 오류 메시지 생성** 지원
+
+---
+
+### 4. GlobalException 메시지 처리 구조 개선 — 유연한 예외 메시지 생성
+
+> **핵심**: `ErrorCode` 기본 메시지 + `dynamicMessagePart`를 조합하여 **상황별 상세 오류 메시지를 동적으로 구성**
+
+```java
+@Getter
+@SuppressWarnings("serial")
+public class GlobalException extends RuntimeException {
+
+    private final ErrorCode errorCode;
+    private Exception causeException = null;
+    private boolean moveToErrorPage = false;
+    private String dynamicMessagePart = null;   // ← 동적 메시지 파트
+
+    // 신규 생성자: ErrorCode + 동적 메시지
+    public GlobalException(ErrorCode errorCode, String dynamicMessagePart) {
+        super(errorCode.getMessage());
+        this.errorCode = errorCode;
+        this.dynamicMessagePart = dynamicMessagePart;
+    }
+
+    // 신규 생성자: ErrorCode + 동적 메시지 + 원인 예외
+    public GlobalException(ErrorCode errorCode, String dynamicMessagePart, 
+                           Exception causeException) {
+        super(errorCode.getMessage(), causeException);
+        this.errorCode = errorCode;
+        this.dynamicMessagePart = dynamicMessagePart;
+        this.causeException = causeException;
+    }
+
+    // 기존 생성자 (하위 호환성 유지)
+    public GlobalException(ErrorCode errorCode, Exception causeException, 
+                           boolean moveToErrorPage) { ... }
+    public GlobalException(ErrorCode errorCode, Exception causeException) { ... }
+    public GlobalException(ErrorCode errorCode) { ... }
+}
+```
+
+**사용 예시 — 동적 메시지 조합:**
+```java
+// "로그인 정보를 확인할 수 없습니다. (인증 서버 응답코드: -1205)"
+throw new GlobalException(ErrorCode.SYSTEM_107, "인증 서버 응답코드: -1205");
+```
+
+> **강조 포인트**
+> - **다중 생성자 오버로딩**으로 다양한 예외 발생 상황에 유연하게 대응
+> - `dynamicMessagePart`로 **정적 ErrorCode 메시지 + 런타임 컨텍스트 정보** 조합 가능
+> - 기존 생성자를 유지하여 **하위 호환성(Backward Compatibility)** 보장
+> - `RuntimeException` 상속으로 **Unchecked Exception** 처리 → 비즈니스 로직 간결화
+
+---
+
+### 5. SessionManager 예외 처리 개선 — ErrorCode 기반 통합 예외 처리
+
+> **핵심**: 세션 관리 로직의 모든 예외를 `ErrorCode` + `dynamicMessagePart` 기반의 [GlobalException](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalException.java#5-74)으로 일원화
+
+**Before (개선 전)**
+```java
+// 분산된 예외 처리, 문자열 하드코딩
+throw new Exception("세션 정보 오류");
+throw new RuntimeException("인증 실패: " + resultCode);
+```
+
+**After (개선 후)**
+```java
+// initSession — 세션 초기화
+throw new GlobalException(ErrorCode.SYSTEM_102);                        // 필수 정보 누락
+throw new GlobalException(ErrorCode.SYSTEM_107, e.getMessage(), e);     // 인증 오류 + 원인
+
+// tokenVerify — 토큰 검증
+throw new GlobalException(ErrorCode.SYSTEM_107, 
+    "인증 서버 응답코드: " + resultCode);                                  // 동적 메시지
+
+// checkSession — 세션 유효성 검증
+throw new GlobalException(ErrorCode.SYSTEM_107, 
+    e.getMessage(), e.getCauseException());                             // 예외 체이닝
+```
+
+**SessionManager 예외 처리 흐름:**
+```
+SessionException    → catch → GlobalException(SYSTEM_107, dynamicMessage)으로 변환
+GlobalException     → catch → 그대로 re-throw (예외 체이닝 유지)
+Exception           → catch → GlobalException(SYSTEM_107, dynamicMessage)으로 래핑
+```
+
+> **강조 포인트**
+> - throw 구문이 **`ErrorCode` 기반으로 단순화** → 코드 가독성 향상
+> - 모든 예외가 [GlobalException](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalException.java#5-74)으로 통일되어 [GlobalExceptionHandler](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalExceptionHandler.java#20-69)에서 **일관된 처리 가능**
+> - **예외 체이닝(Exception Chaining)** 패턴 적용 → 원인 예외가 소실되지 않도록 보장
+> - `catch (GlobalException e) { throw e; }` — GlobalException은 그대로 re-throw하여 **이중 래핑 방지**
+
+---
+
+## 시스템 아키텍처
+
+```
+Client Request
+     │
+     ▼
+┌─────────────────────────────┐
+│       Controller Layer      │
+│  (비즈니스 로직 집중)         │
+│  throw GlobalException(     │
+│    ErrorCode.SYSTEM_XXX,    │
+│    "동적 메시지"              │
+│  )                          │
+└──────────┬──────────────────┘
+           │ 예외 발생
+           ▼
+┌─────────────────────────────┐
+│   GlobalExceptionHandler    │
+│   (@ControllerAdvice)       │
+│                             │
+│  ┌───────────────────────┐  │
+│  │ handleGlobalException │  │
+│  │ handleResponseExcept. │  │
+│  └───────────────────────┘  │
+│                             │
+│  • ErrorCode에서 코드/메시지  │
+│    추출                     │
+│  • dynamicMessagePart 조합  │
+│  • 로깅 (URL + 코드 + 메시지)│
+│  • ErrorResponse 생성       │
+└──────────┬──────────────────┘
+           │
+           ▼
+┌─────────────────────────────┐
+│    ErrorResponse (DTO)      │
+│  {                          │
+│    "timestamp": "...",      │
+│    "errorCode": "101",      │
+│    "message": "..."         │
+│  }                          │
+└─────────────────────────────┘
+           │
+           ▼
+     Client Response
+```
+
+---
+
+## 주요 성과
+
+| 성과 | 설명 |
+|------|------|
+| **REST API 오류 응답 표준화** | [ErrorResponse](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/dto/ErrorResponse.java#8-21) DTO로 모든 API 오류 응답 형식 통일 |
+| **ErrorCode 체계 정리** | `SYSTEM_` 접두어 + `HttpStatus` 그룹핑으로 **100개 이상의 오류 코드** 체계적 관리 |
+| **공통 예외 처리 구조 구축** | `@ControllerAdvice` 기반으로 예외 처리 로직을 **단일 지점에 중앙화** |
+| **디버깅 정보 강화** | 요청 URL + ErrorCode + 메시지 + 원인 예외를 포함한 **구조화된 로깅** 구현 |
+| **유지보수성 향상** | 새로운 오류 추가 시 `ErrorCode` enum에만 등록하면 되는 **확장 용이한 구조** |
+| **하위 호환성 유지** | 기존 생성자를 유지하면서 신규 기능(`dynamicMessagePart`) 추가 |
+
+---
+
+## 사용 기술 상세
+
+### Spring Framework
+- **`@ControllerAdvice`**: 전역 예외 처리 핸들러 정의. 모든 Controller에서 발생하는 예외를 단일 클래스에서 처리
+- **`@ExceptionHandler`**: 예외 타입별 핸들러 메서드 매핑. [GlobalException.class](file:///c:/DEV_TMM_JDK8/workspace/mng_sdk_jdk8/target/classes/com/unidocs/sdk/mng/common/exception/GlobalException.class), `ResponseException.class` 등 타입별 세분화
+- **`HttpStatus`**: HTTP 상태 코드를 Java enum으로 매핑. `ErrorCode`와 연결하여 적절한 HTTP 응답 코드 반환
+
+### Lombok
+- **`@Getter`**: 보일러플레이트 코드 제거. `ErrorCode`, [GlobalException](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalException.java#5-74), [ErrorResponse](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/dto/ErrorResponse.java#8-21)에 적용
+- **`@Slf4j`**: 로깅 코드 간소화. [GlobalExceptionHandler](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/exception/GlobalExceptionHandler.java#20-69), [SessionManager](file:///c:/DEV_TMM_JDK8/workspace/cms_sdk_jdk8/src/main/java/com/unidocs/sdk/cms/common/SessionManager.java#20-346)에 적용
+
+### Jackson
+- **`@JsonFormat`**: `ErrorResponse.timestamp` 필드의 JSON 직렬화 형식을 `yyyy-MM-dd HH:mm:ss`로 통일
+
+### Design Pattern
+- **Global Exception Handler 패턴**: `@ControllerAdvice` 기반의 중앙화된 예외 처리 아키텍처
+- **Error Code Enum 패턴**: 오류 코드를 enum으로 관리하여 타입 안전성 및 관리 편의성 확보
+- **Exception Chaining 패턴**: 원인 예외를 보존하면서 비즈니스 예외로 변환
+- **DTO 패턴**: 표준화된 오류 응답 구조 정의
+
+---
+
+## 배운 점
+
+이번 작업을 통해 백엔드 서비스에서 **공통 예외 처리 구조**가 서비스 안정성과 유지보수성에 핵심적인 역할을 한다는 것을 경험했습니다.
+
+특히:
+
+1. **`@ControllerAdvice` 기반의 전역 예외 처리 설계** — 예외 처리 로직을 중앙화하면 각 Controller가 비즈니스 로직에만 집중할 수 있어 코드 응집도가 크게 향상됩니다.
+
+2. **ErrorCode enum을 통한 오류 코드 관리** — 오류 코드를 enum으로 관리하면 컴파일 타임에 오류를 잡을 수 있고, IDE의 자동완성/리팩토링 기능을 활용할 수 있어 개발 생산성이 높아집니다.
+
+3. **하위 호환성을 고려한 점진적 개선** — 기존 코드를 깨뜨리지 않으면서 새로운 기능(`dynamicMessagePart`)을 추가하는 것이 실무에서 매우 중요하다는 것을 배웠습니다.
+
+4. **예외 체이닝의 중요성** — 원인 예외를 소실시키지 않고 보존하는 것이 운영 환경에서의 디버깅 효율에 직결된다는 것을 체감했습니다.

@@ -1,86 +1,158 @@
 .childrenWrap {
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  width: 100vw;
+  width: 100%;
   padding: 0;
+  padding-top: 72px;
   margin: 0;
-  padding: 24px;
-  /* background: linear-gradient(180deg, #484848, #000000); */
-  background: #FCEFC9;
   box-sizing: border-box;
 }
+
 .childrenWrap::selection {
-  /* background: rgba(160, 96, 220, 0.38); */
-  background: #FCEFC9;
-  color: #E3271E;
+  color: var(--primary);
 }
 
-.childrenWrap a {
-  /* padding: 8px 0; */
-  color: #FCEFC9;
-  font-size: 12px;
-  font-weight: 800;
-  text-decoration: none;
-  border: none;
-}
-
-.maxWidth{
+.maxWidth {
   width: 100%;
   max-width: 1000px;
-  margin-top: 80px;
-  color:#fff;
+  color: var(--text);
 }
 
+/* NAVBAR */
 .appTop {
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   width: 100%;
-  padding: 12px 24px;
-  background-color:#E3271E;
+  height: 72px;
+
+  background: var(--nav-bg);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+
+  z-index: 1000;
+}
+
+.navInner {
+  max-width: 1200px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 32px;
+
   box-sizing: border-box;
 }
-.appTop > a > svg{
-  width: 40px;
-  height: 100%;
+
+.scrolled {
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-nav);
 }
-.appTop > div {
+
+/* LOGO */
+.logo {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+/* MENU */
+.menu {
   display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  padding: 8px 0;
-  max-width: 1000px;
+  gap: 36px;
+  align-items: center;
 }
-.appTop > div > button {
+
+.menu a {
+  position: relative;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.menu a:hover {
+  color: var(--primary);
+}
+
+.menuBtn {
+  position: relative;
+  z-index: 1100;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 24px;
+  height: 18px;
   padding: 0;
-  background-color: transparent;
+  margin: 0;
+
+  color: var(--text);
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* 색상 스타일 */
-.primary {
-  background-color: #3b82f6; /* blue-500 */
-  color: white;
-}
-.primary:hover {
-  background-color: #2563eb; /* blue-600 */
+.menuBtn span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+
+  background: var(--text);
+  transition: all 0.3s ease;
 }
 
-.secondary {
-  background-color: #d1d5db; /* gray-300 */
-  color: black;
-}
-.secondary:hover {
-  background-color: #9ca3af; /* gray-400 */
+.menuBtn.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
 }
 
-.danger {
-  background-color: #ef4444; /* red-500 */
-  color: white;
+.menuBtn.active span:nth-child(2) {
+  opacity: 0;
 }
-.danger:hover {
-  background-color: #dc2626; /* red-600 */
+
+.menuBtn.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.activeMenu {
+  color: var(--primary) !important;
+}
+
+@media (max-width:768px) {
+  .menuBtn {
+    display: flex;
+  }
+
+  .menu {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    padding: 30px 0;
+
+    background: var(--nav-bg);
+    transform: translateY(-20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
 }

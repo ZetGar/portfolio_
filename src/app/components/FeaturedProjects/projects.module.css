@@ -1,0 +1,309 @@
+.projects {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 24px;
+}
+
+.projectsContainer {
+  width: 1100px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.sectionDescription {
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.projectGrid {
+  margin-top: 48px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* CARD */
+
+.projectCard {
+
+  position: relative;
+
+  padding: 28px;
+  padding-bottom: 48px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--border-light);
+
+  background: var(--bg-card);
+
+  text-decoration: none;
+
+  color: inherit;
+
+  overflow: hidden;
+
+  transition: all .3s ease;
+
+  /* scroll reveal stagger */
+  opacity: 0;
+  transform: translateY(48px);
+}
+
+:global(.visible) .projectCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    box-shadow 0.3s ease;
+}
+
+.projectCard:hover {
+
+  transform: translateY(-8px);
+
+  box-shadow: var(--shadow-card);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+/* gradient hover */
+
+.projectCard::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(135deg,
+      var(--primary-light),
+      transparent);
+
+  opacity: 0;
+
+  transition: opacity .3s ease;
+
+}
+
+.projectCard:hover::before {
+  opacity: 1;
+}
+
+/* CONTENT */
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+}
+
+.projectTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.projectSummary {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.6;
+}
+
+.projectTech {
+  margin-top: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.techChip {
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  background: var(--bg-chip);
+  color: var(--text-dim);
+
+}
+
+/* hover CTA */
+
+.cardHover {
+
+  position: absolute;
+
+  bottom: 20px;
+  right: 24px;
+
+  font-size: 13px;
+
+  color: var(--primary);
+
+  opacity: 0;
+
+  transform: translateY(10px);
+
+  transition: all .25s ease;
+
+}
+
+.projectCard:hover .cardHover {
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+/* 모바일 */
+
+@media (max-width:768px) {
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+.moreProjects {
+  margin-top: 56px;
+  text-align: center;
+}
+
+.moreBtn {
+
+  display: inline-block;
+
+  padding: 14px 28px;
+
+  border-radius: 10px;
+
+  border: 1px solid var(--border);
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  color: var(--text);
+
+  transition: all .25s ease;
+}
+
+.moreBtn:hover {
+
+  border-color: var(--primary);
+
+  color: var(--primary);
+
+  transform: translateY(-2px);
+
+}
+
+.thumbnail {
+  width: 100%;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* Code placeholder (no-thumbnail card) */
+
+.codePlaceholder {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.codeHeader {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #0f172a;
+}
+
+.codeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #334155;
+}
+
+.codeDot:first-child {
+  background: #ef4444;
+}
+
+.codeDot:nth-child(2) {
+  background: #eab308;
+}
+
+.codeDot:nth-child(3) {
+  background: #22c55e;
+}
+
+.codeBody {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.codeLine {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.codeKeyword {
+  color: #c084fc;
+}
+
+.codeComment {
+  color: #64748b;
+}
+
+.codeString {
+  color: #4ade80;
+}
+
+.codeFunc {
+  color: #38bdf8;
+}
+
+.codeTag {
+  color: #f472b6;
+}

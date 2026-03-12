@@ -1,0 +1,143 @@
+.backend {
+  padding: 120px 24px;
+  background: var(--bg-alt);
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sectionDescription {
+  margin-top: 12px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.backendGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* CARD */
+
+.backendCard {
+
+  position: relative;
+
+  padding: 28px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--border-light);
+
+  background: var(--bg-card);
+
+  transition: all .3s ease;
+
+  /* scroll reveal stagger */
+  opacity: 0;
+  transform: translateY(48px);
+}
+
+:global(.visible) .backendCard {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    box-shadow 0.3s ease;
+}
+
+.backendCard:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow: var(--shadow-card);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+/* gradient hover */
+
+.backendCard::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg,
+      var(--primary-light),
+      transparent);
+
+  opacity: 0;
+
+  transition: opacity .3s ease;
+
+}
+
+.backendCard:hover::before {
+  opacity: 1;
+}
+
+.backendCard h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.backendCard p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* TECH */
+
+.techList {
+  margin-top: 16px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.techChip {
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  background: var(--bg-chip);
+  color: var(--text-dim);
+
+}
+
+/* MOBILE */
+
+@media (max-width:768px) {
+
+  .backend {
+    padding: 80px 24px;
+  }
+
+  .backendGrid {
+    grid-template-columns: 1fr;
+  }
+
+}

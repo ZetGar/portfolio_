@@ -26,15 +26,7 @@ export default function Page() {
         <h2>{data.title}</h2>
       </div>
 
-      {/* {data.preview && (
-        <div className={styles.appDownloadWrap}>
-          {data.preview.content.map((previewDownload, index) => (
-            <Link href={previewDownload} key={`preview_${index}`}>
-              {index === 0 ? "GOOGLEPLAY 다운로드" : "APPSTORE 다운로드"}
-            </Link>
-          ))}
-        </div>
-      )} */}
+
 
       <div className={styles.descriptionWrap}>
         {data.description.map((desc, idx) => (

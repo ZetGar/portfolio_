@@ -1,0 +1,118 @@
+.strengths {
+  padding: 120px 24px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.subtitle {
+  margin-top: 12px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+}
+
+.grid > * {
+  flex: 0 1 calc((100% - 56px) / 3);
+}
+
+.card {
+  padding: 32px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--border-light);
+
+  background: var(--bg-card);
+
+  position: relative;
+
+  transition: all .3s ease;
+
+  /* scroll reveal stagger */
+  opacity: 0;
+  transform: translateY(48px);
+}
+
+:global(.visible) .card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 0.15s),
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: var(--shadow-card);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: 18px;
+
+  background: linear-gradient(135deg,
+      var(--primary-light),
+      transparent);
+
+  opacity: 0;
+
+  transition: opacity .3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 모바일 */
+
+@media (max-width:768px) {
+
+  .strengths {
+    padding: 80px 24px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+}

@@ -1,0 +1,14 @@
+.progress {
+  position: fixed;
+  top: 72px;
+  left: 0;
+
+  height: 3px;
+
+  background: linear-gradient(90deg,
+      var(--primary),
+      var(--primary-hover));
+
+  z-index: 999;
+  transition: width .1s linear;
+}
