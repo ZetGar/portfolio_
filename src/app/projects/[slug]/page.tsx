@@ -126,6 +126,7 @@ export default function ProjectDetail({ params }: Props) {
           </section>
         )}
 
+
         {/* Gallery */}
         {project.gallery && project.gallery.length > 0 && (
           <section className={styles.gallerySection}>
@@ -171,17 +172,7 @@ export default function ProjectDetail({ params }: Props) {
           />
         )}
 
-        {/* Notion Link */}
-        {project.notion && (
-          <a
-            href={project.notion}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.notionBtn}
-          >
-            View Detailed Documentation →
-          </a>
-        )}
+
 
       </div>
 
