@@ -76,8 +76,12 @@
   color: var(--primary);
 }
 
-.active {
+.filterBtn.active {
   background: var(--primary);
-  color: white;
+  color: #ffffff;
   border-color: var(--primary);
+}
+
+.filterBtn.active:hover {
+  color: #ffffff;
 }
