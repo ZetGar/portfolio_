@@ -25,9 +25,8 @@ export default function FeaturedProjects() {
         </h2>
 
         <p className={styles.sectionDescription}>
-          데이터 중심 서비스에서 발생하는 UX 문제를 해결하고
-          대규모 데이터 UI와 데이터 시각화 경험을 통해
-          실제 서비스 환경에서의 사용자 경험을 개선했습니다.
+          Sticky 테이블, 데이터 시각화, 다단계 상담 플로우, 실시간 통신까지 —
+          금융 서비스의 복잡한 문제를 프론트엔드 설계로 해결한 프로젝트들입니다.
         </p>
 
         <div className={styles.projectGrid} ref={ref}>

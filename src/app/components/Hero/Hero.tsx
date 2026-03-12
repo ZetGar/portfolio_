@@ -95,9 +95,9 @@ export default function Hero() {
           <p
             className={`${styles.heroDescription} ${styles.fadeBase} ${showContent ? styles.fadeIn : ""}`}
           >
-            4년+ 금융 서비스 프론트엔드 개발 경험
+            데이터가 많을수록, 설계가 중요합니다.
             <br />
-            대규모 데이터 UI와 데이터 시각화를 통해 사용자 경험을 설계합니다.
+            복잡한 데이터를 직관적인 UI로, 어려운 비즈니스 플로우를 자연스러운 UX로 설계합니다.
           </p>
 
           <div
