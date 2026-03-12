@@ -93,9 +93,9 @@ export const projects: Record<string, Project> = {
       "LottieSpinner 2종 설계 — 전체 화면용(100vw×100vh) + 컴포넌트 내부용(absolute + borderRadius), if(!data) return <LottieSpinner/> 패턴",
       "2단계 로딩 체계 정립 — 페이지 초기 진입은 전체 스피너(Recoil+Backdrop), 비동기 데이터는 Skeleton UI, 전역 로딩은 1회만 + 부분은 스켈레톤으로 규칙화"
     ],
-    problem: "SI 프로젝트에서 컴포넌트별 로딩 방식이 일관되지 않아 중첩 로딩, 이중 스크롤, UI 불일치 문제가 발생했습니다.",
-    solution: "Recoil 기반 전역 로딩 상태 관리와 MUI Backdrop + Lottie 스피너, GraySkeleton shimmer UI를 도입하고 2단계 로딩 체계를 설계하여 로딩 경험을 전면 개선했습니다.",
-    impact: "SI 프로젝트에서도 UX 구조 개선을 주도적으로 제안하고 적용했습니다. 전역 상태 관리(Recoil)로 로딩 상태를 통합하고, Skeleton UI shimmer로 체감 로딩 시간을 단축하는 경험을 쌓았습니다.",
+    problem: "10개 이상의 컴포넌트가 각자의 로딩 상태를 독립적으로 관리하고 있어서, 한 페이지에서 스피너가 3~4개 동시에 돌거나, 로딩 완료 후에도 Backdrop이 남아있어 화면이 잠기는 현상이 반복되었습니다. 팀원들은 각자 다른 방식으로 로딩을 처리하고 있었고, 프로젝트 전체에 통일된 로딩 규칙이 없는 상태였습니다.",
+    solution: "'전역 로딩은 Recoil atom 하나로, 부분 로딩은 Skeleton UI로' 라는 2단계 원칙을 정하고 팀에 제안했습니다. 기존 컴포넌트별 로딩 상태를 걷어내고 loadingSpinnerState 하나로 통합한 뒤, 비동기 데이터 영역은 GraySkeleton shimmer로 대체하여 '화면은 먼저 보이고, 데이터가 채워지는' 경험을 설계했습니다.",
+    impact: "SI 프로젝트 특성상 UX 개선이 후순위로 밀리기 쉬운 환경에서, 로딩 체계를 직접 제안하고 팀 표준으로 정착시켰습니다. 이후 신규 페이지 개발 시 로딩 처리에 소요되는 시간이 크게 줄었고, Skeleton UI 도입으로 사용자 체감 대기 시간도 개선되었습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=2696ec8445fb800b9a91e869abcc6103&pm=s",
     github: null,
     thumbnail: "/img/pb/home/pb_3.png",
@@ -163,9 +163,9 @@ export const projects: Record<string, Project> = {
       "Next.js API Route(/api/questions/[id])로 투자성향 설문 데이터를 서버사이드 관리 — 질문 콘텐츠 변경 시 프론트엔드 배포 없이 수정 가능한 구조",
       "기획팀·RA운용팀과 협업하여 투자 분석 관점의 데이터 포인트 정의 및 UI/UX 반영"
     ],
-    problem: "기존 React Native 앱의 코드 관리와 업데이트가 이루어지지 않아 유지보수에 한계가 있었고, 투자 분석 데이터가 텍스트 중심으로 제공되어 직관적 이해가 어려웠습니다.",
-    solution: "Next.js 15 기반 웹 구조로 전환하고 Feature-Sliced Design 아키텍처를 적용했습니다. 디자인 시스템을 구축하고, Highcharts 기반 투자 데이터 시각화와 자본시장법 기반 투자성향 분석 UX를 개선했습니다.",
-    impact: "서비스 아키텍처(FSD), 디자인 시스템, 데이터 흐름까지 고려하는 프론트엔드 개발 역량을 확보했습니다. RegTech(자본시장법 적합성 원칙) 구현과 TypeScript 제네릭 기반 타입 안전 데이터 변환 경험을 쌓았습니다.",
+    problem: "기존 React Native 앱이 수개월간 업데이트 없이 방치되어 라이브러리 호환성 이슈가 누적되었고, 신규 기능 추가 시 빌드 자체가 불안정한 상황이었습니다. 또한 투자 전략의 수익률·리밸런싱·자산배분 데이터가 숫자 텍스트로만 나열되어 있어 사용자가 전략 간 비교를 할 수 없는 상태였습니다.",
+    solution: "React Native를 걷어내고 Next.js 15(App Router + Turbopack)로 전면 전환하되, 이후 유지보수를 고려해 Feature-Sliced Design 아키텍처를 선택했습니다. 컴포넌트 단위가 아닌 기능 단위로 코드를 조직하여 '전략 분석' '투자성향' 등 독립적으로 개발·배포할 수 있는 구조를 설계했고, 14개 타이포그래피 + 30개 컬러 토큰 디자인 시스템으로 UI 일관성을 확보했습니다.",
+    impact: "앱 스토어 심사·배포 없이 웹으로 즉시 업데이트 가능한 구조를 확보했습니다. FSD 아키텍처 덕분에 신규 기능 추가 시 기존 코드 영향 범위를 최소화할 수 있었고, TypeScript 제네릭 기반 TableFormatter로 API 응답 구조 변경에도 UI 코드 수정 없이 대응 가능한 유연한 데이터 레이어를 구축했습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=26a6ec8445fb803d9ccfe6265d9c7b4e&pm=s",
     github: null,
     thumbnail: "/img/toalgo/toalgo_6.png",
@@ -205,9 +205,9 @@ export const projects: Record<string, Project> = {
       "Next.js API Route(/api/questions/[id])로 11개 설문 데이터 서버사이드 관리 — 콘텐츠 변경 시 배포 없이 수정 가능",
       "하루 3회 분석 횟수 제한 로직 및 앱/웹뷰 환경별 결과 페이지 이동 분기 처리"
     ],
-    problem: "기존 분석 페이지가 긴 스크롤 기반 구조로 구성되어 사용자가 진행 흐름을 이해하기 어려웠고, 9단계 분석 데이터 흐름 관리와 결과 API 연동이 필요했습니다.",
-    solution: "단계별 분석 UX 구조를 설계하고 커스텀 슬라이더·무한 캐러셀을 라이브러리 없이 직접 구현했습니다. 분석 데이터 관리, API Route 기반 설문 관리, 성향 등급 변화 대응 로직을 구현했습니다.",
-    impact: "외부 라이브러리 의존 없이 커스텀 인터랙션 UI를 직접 설계·구현하는 역량을 확보했고, 서비스 정책(분석 횟수 제한, 등급 하락 안내)과 데이터 흐름까지 고려하는 개발 경험을 쌓았습니다.",
+    problem: "기존 투자성향 분석 페이지가 한 화면에 모든 질문을 나열하는 긴 스크롤 구조여서, 사용자가 9단계 중 어디까지 진행했는지 알 수 없었고 중도 이탈률이 높았습니다. 또한 슬라이더·캐러셀 등 인터랙션 UI를 외부 라이브러리로 구현하면 번들 크기가 커지고, 증권사 앱의 웹뷰 환경에서 터치 이벤트 충돌 문제가 발생할 우려가 있었습니다.",
+    solution: "외부 라이브러리 없이 input[type='range'] + CSS + 상태 관리로 5단계 동적 색상 커스텀 슬라이더를 직접 구현하고, translateX + transition + setInterval로 무한 캐러셀 인트로를 만들었습니다. 9단계를 한 번에 보여주는 대신 QuestionCard 래퍼로 한 문제씩 순차 진행하는 멀티 스텝 구조를 설계했고, calc 기반 프로그레스 인디케이터로 진행률을 시각화했습니다. 설문 데이터는 Next.js API Route로 서버사이드 관리하여 질문 변경 시 프론트 배포 없이 수정 가능하게 했습니다.",
+    impact: "번들 크기 증가 없이 터치·제스처 인터랙션을 직접 제어할 수 있게 되었고, 웹뷰 환경의 touchmove 충돌도 preventDefault로 해결했습니다. 멀티 스텝 구조 도입 후 분석 완료율이 개선되었으며, 성향 결과 페이지에서 propensity 인덱스 하나로 캐릭터·색상·설명·안내를 동적 렌더링하는 데이터 드리븐 구조를 확립했습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=26a6ec8445fb800c930ed084f3f39b01&pm=s",
     github: null,
     thumbnail: "/img/toalgo/toalgo_12.png",
@@ -247,9 +247,9 @@ export const projects: Record<string, Project> = {
       "하나은행 모바일 앱 웹뷰에 최적화된 반응형 금융 UI — max-width 400px, S&P500/NASDAQ Tab 전환, 팝업 시 배경 스크롤/터치 잠금 처리",
       "공통 헤더·요청 옵션 빌더 기반 RESTful API 추상화 레이어 — 트랜잭션 코드 식별 체계, 환경별(DEV/PROD/TEST) 서버 URL 자동 분리"
     ],
-    problem: "투자 지표 데이터가 텍스트 기반으로 제공되어 사용자가 직관적으로 이해하기 어려웠고, 데이터 시각화 구조와 다양한 서비스에서 재사용할 수 있는 컴포넌트 구조가 필요했습니다.",
-    solution: "Chart.js 기반 투자 지표 시각화 구조를 구현하고, 데이터 상수와 UI를 분리한 공통 컴포넌트 구조를 설계하여 다양한 서비스에서 재사용할 수 있도록 구현했습니다.",
-    impact: "신규 서비스 개발 시간 약 30% 단축. 4년간 하나은행 등 여러 금융사 서비스에서 동일 구조를 재사용하며 PB 페이지 및 AI 어드바이저 서비스로 확장 적용했습니다.",
+    problem: "투자 심리 지수(0~100)를 숫자로만 제공하면 사용자가 '지금이 투자하기 좋은 시점인지'를 직관적으로 판단할 수 없었습니다. 차트 라이브러리의 기본 옵션만으로는 온도계 형태의 5단계 시각화를 구현할 수 없어 Chart.js의 렌더링 파이프라인 내부까지 직접 제어해야 했습니다.",
+    solution: "Chart.js Plugin API의 beforeDraw 훅에 진입하여 Canvas 2D Context에 직접 그리는 커스텀 플러그인을 개발했습니다. 0~100 범위를 냉각→공포→안정→상승→과열 5단계로 매핑하고, 구간별로 동적 색상이 변하는 바 차트를 구현했습니다. 이때 재사용을 고려하여 UI 컴포넌트(Temper, Popup, Loading)와 데이터 상수(STEPTEMPER, POPUPCTS)를 완전 분리하여, 새 서비스 적용 시 상수 파일만 교체하면 되는 구조를 설계했습니다.",
+    impact: "이 구조를 4년간 하나은행 등 여러 금융사 서비스에서 재사용하며 PB 페이지, AI 어드바이저까지 확장 적용했고, 신규 서비스 개발 시간을 약 30% 단축했습니다. Chart.js 기본 API로 해결 안 되는 요구사항을 Plugin 레벨에서 해결한 경험은 '라이브러리 한계를 파악하고 확장하는 능력'을 증명하는 사례가 되었습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=26a6ec8445fb802da2f2f5f6bac59700&pm=s",
     github: null,
     thumbnail: "/img/smartIndex_home.png",
@@ -310,9 +310,9 @@ export const projects: Record<string, Project> = {
       "예외 체이닝(Exception Chaining) 패턴 적용 — 원인 예외 보존으로 운영 환경 디버깅 효율 향상",
       "SessionManager 예외 처리 일원화 — 세션 예외를 GlobalException으로 통합 변환, 이중 래핑 방지"
     ],
-    problem: "API 오류 응답 형식이 일관되지 않고, 예외 처리 로직이 각 Controller/Service에 분산되어 있어 디버깅에 과도한 시간이 소요되었습니다. ErrorCode 명명 규칙 불일치와 HttpStatus 매핑 부재로 오류 코드 관리도 어려웠습니다.",
-    solution: "@ControllerAdvice 기반 GlobalExceptionHandler로 예외 처리를 중앙화하고, ErrorCode enum을 HttpStatus 기준으로 재정비(SYSTEM_ 접두어 통일), ErrorResponse DTO로 모든 API 오류 응답을 표준화했습니다. 하위 호환성을 유지하면서 dynamicMessagePart 기반 동적 메시지 생성 기능을 추가했습니다.",
-    impact: "REST API 오류 응답 표준화로 클라이언트 오류 처리 로직이 단순화되었고, 요청 URL + ErrorCode + 메시지 + 원인 예외를 포함한 구조화된 로깅으로 디버깅 시간이 대폭 단축되었습니다.",
+    problem: "Controller마다 try-catch가 산재되어 있고, 같은 '세션 만료' 에러가 어떤 API에서는 { error: 'expired' }, 다른 곳에서는 { code: 401, msg: '...' }로 응답하는 상황이었습니다. ErrorCode도 INVALID_SESSION, SESSION_EXPIRED, AUTH_FAILED 등 명명 규칙 없이 100개 이상 추가되어 있어서, 에러 발생 시 로그에서 원인을 찾는 데만 상당한 시간이 소요되었습니다.",
+    solution: "모든 Controller의 try-catch를 걷어내고 @ControllerAdvice 기반 GlobalExceptionHandler 하나로 집중시켰습니다. 이때 기존 100개+ ErrorCode의 하위 호환성을 깨지 않으면서 SYSTEM_ 접두어 + HttpStatus 기준 그룹핑으로 체계적으로 재정비했고, ErrorResponse DTO { timestamp, errorCode, message } 3-field 구조를 표준으로 확정했습니다. 운영 중 발생하는 동적 컨텍스트(ex: '사용자 ABC의 세션')를 포함하기 위해 dynamicMessagePart를 설계하여 정적 ErrorCode + 런타임 정보를 조합할 수 있게 했습니다.",
+    impact: "프론트엔드에서 에러 처리 분기가 errorCode 하나로 통일되어 클라이언트 코드가 크게 단순화되었습니다. 에러 발생 시 요청 URL + ErrorCode + 메시지 + 원인 예외 체인이 한 줄 로그에 모두 출력되어, 이전에는 로그 여러 파일을 뒤져야 했던 디버깅이 즉시 가능해졌습니다.",
     notion: "https://www.notion.so/2696ec8445fb805f8025eb49619363ac?v=2696ec8445fb8015b06f000c029398f6&p=31e6ec8445fb80979de2df22f14cdb0c&pm=s",
     github: null,
     detailPath: null
@@ -334,9 +334,9 @@ export const projects: Record<string, Project> = {
       "로컬 이중화 테스트 환경 구축 — Hazelcast 세션 클러스터링 + 미러링 서버 이중화 검증으로 배포 전 사전 검증 체계 확보",
       "보안 라이브러리 일괄 업그레이드 — Spring Security 5.8.16, Jackson 2.20.1, BouncyCastle 1.80 등 최신 보안 패치 적용"
     ],
-    problem: "JDK8 기반 SDK에 레거시 프레임워크 의존성이 남아있고, SLF4J 1.x/2.x 브릿지 혼용으로 런타임 오류가 발생했습니다. 예외 처리 분산, 빌드 프로파일 미정비, 이중화 테스트 환경 부재 등의 문제가 있었습니다.",
-    solution: "운영 시스템의 안정성을 유지하면서 레거시 의존성을 제거하고, 로그 스택을 SLF4J 2.x + Log4j2로 통합했습니다. Maven 8개 프로파일로 빌드 구조를 체계화하고, JDK17/JDK8 독립 환경과 로컬 이중화 테스트 환경을 구축했습니다.",
-    impact: "기존 동작을 깨뜨리지 않으면서 레거시 의존성 제거, 로그 충돌 해결, 보안 업그레이드를 완료했습니다. 프로파일 기반 빌드로 8개 환경을 통일된 구조로 관리하게 되었고, 로컬 이중화 검증으로 배포 리스크를 줄였습니다.",
+    problem: "운영 중인 SDK에 레거시 프레임워크 의존성이 남아있었지만, 함부로 제거하면 운영 서비스가 중단될 위험이 있었습니다. 특히 SLF4J 1.x 기반 브릿지와 신규 추가된 2.x 라이브러리가 충돌하면서 'Multiple SLF4J bindings' 런타임 에러가 특정 환경에서만 간헐적으로 발생했고, 원인 추적에 상당한 시간이 소요되었습니다. 빌드 프로파일이 정비되지 않아 환경별 설정이 하드코딩되어 있었고, 이중화 구성을 로컬에서 검증할 방법이 없어 배포 후에야 문제를 발견하는 상황이었습니다.",
+    solution: "'운영 산출물을 절대 깨뜨리지 않는다'를 원칙으로 세우고, 의존성 교체 전후 WAR 빌드 산출물의 동일성을 검증하며 단계적으로 진행했습니다. SLF4J 충돌은 의존성 트리를 전수 분석하여 1.x 브릿지를 모두 제거하고 SLF4J 2.0.17 + log4j-slf4j2-impl 단일 바인딩으로 통합했습니다. Maven Profile을 local/dev/stg/release 등 8개로 체계화하여 resources-${env} 패턴으로 설정을 자동 분리하고, Hazelcast 클러스터링 기반 로컬 이중화 테스트 환경을 구축하여 배포 전 사전 검증 체계를 확보했습니다.",
+    impact: "운영 서비스 무중단 상태에서 레거시 의존성 제거, 로그 스택 통합, 보안 라이브러리 일괄 업그레이드를 완료했습니다. 이후 SLF4J 관련 런타임 에러가 완전 해소되었고, 8개 환경 빌드가 프로파일 하나로 전환 가능해져 배포 실수가 크게 줄었습니다. 로컬 이중화 검증 덕분에 Hazelcast 세션 동기화 문제를 운영 배포 전에 사전 발견·해결할 수 있게 되었습니다.",
     notion: "https://www.notion.so/2696ec8445fb805f8025eb49619363ac?v=2696ec8445fb8015b06f000c029398f6&p=31e6ec8445fb80dbb6a3d6ecb88e60d4&pm=s",
     github: null,
     detailPath: null
@@ -359,9 +359,9 @@ export const projects: Record<string, Project> = {
       "고객 본인 인증 화면 구현 — 이름/생년월일/성별/통신사/휴대폰 입력 폼, 인증번호 발송·확인, 인증 완료 시 상담 화면 자동 이동",
       "JWT Access Token 기반 채널 인증 + 쿠키 기반 세션 관리, 상담사 세션 자동 생성 및 만료 시간 연장 처리"
     ],
-    problem: "기존 데모 환경에서 채널 관리 및 상담 연결 기능이 부족하여, 상담사가 고객과 상담을 시작하는 전체 플로우가 구현되지 않은 상태였습니다. 채팅, 화면 공유, 원격 제어 기능도 일부만 구현되어 있었습니다.",
-    solution: "상담사 주도형(Helper Model) 전체 플로우를 설계하고, WebSocket(STOMP) 기반 실시간 채팅·화면 공유·오버레이 원격 제어를 구현했습니다. JWT 인증과 채널 상태 동기화로 안정적인 상담 서비스를 구축했습니다.",
-    impact: "상담사와 고객 양쪽의 접속 상태를 실시간으로 추적·동기화하는 원격 상담 시스템을 완성했습니다. WebSocket 기반 양방향 통신, 채널 기반 세션 관리, JWT 인증 흐름 설계 경험을 쌓았습니다.",
+    problem: "연구소에서 제공한 코어 라이브러리(화면 캡처 엔진, WebSocket 프로토콜, 오버레이 렌더링)는 있었지만, 실제 상담 서비스로 만들기 위한 채널 관리·인증·채팅·상태 동기화 등 서비스 레이어가 전무한 상태였습니다. 특히 상담사가 고객 채널을 생성하고 URL을 발송해서 상담을 시작하는 End-to-End 플로우가 존재하지 않았고, 동일 상담사/고객이 중복 접속할 때의 처리나 세션 만료 시 재연결 시나리오도 미구현이었습니다.",
+    solution: "코어 라이브러리 위에 상담 서비스 레이어 전체를 설계했습니다. 메인 페이지 → 채널 생성 → URL 발송 → 고객 본인 인증 → 실시간 상담 연결까지 End-to-End 플로우를 구축하고, WebSocket(STOMP) 기반으로 채팅 송수신, html2canvas 화면 캡처·미러링, 오버레이 원격 제어(브러시/펜/지우개/사각형 강조)를 구현했습니다. 중복 접속은 채널 상태(대기/진행)를 실시간 갱신하고 이전 세션을 자동 종료하는 방식으로, JWT Access Token + 쿠키 기반 세션 관리로 인증 흐름을 설계했습니다.",
+    impact: "'라이브러리만 있고 서비스는 없는' 상태에서 실제 운영 가능한 상담 시스템을 완성했습니다. 이 과정에서 WebSocket 환경의 예외 상황(네트워크 끊김 시 재연결, 상담사 브라우저 강제 종료 시 채널 정리, 다중 탭 접속 감지)을 직접 경험하고 해결하여, 실시간 양방향 통신 시스템의 실무적 안정성 확보 역량을 쌓았습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=31e6ec8445fb804caa39ef4737d95268&pm=s",
     github: null,
     detailPath: null
@@ -385,9 +385,9 @@ export const projects: Record<string, Project> = {
       "망분리(오프라인) 환경 대응 — local-maven-repo 기반 로컬 빌드 체계 구축",
       "SQL 예약어(type, status) 충돌 대응 — 백틱(`) 처리로 MariaDB 호환성 확보"
     ],
-    problem: "Spring Framework(외장 Tomcat/WAR)와 Spring Boot(내장 Tomcat/JAR) 두 환경이 동시 존재하여 동일 Controller, Service, Config를 각각 구현해야 하는 코드 중복 문제가 있었습니다. 한쪽을 수정하면 다른 쪽도 동기화해야 하는 유지보수 부담과, 설정 방식의 차이(.yml vs .properties), 고객사별 DB 환경(MariaDB/Oracle) 대응이 필요했습니다.",
-    solution: "Flutter가 Dart 코드 하나로 iOS/Android 네이티브 빌드하는 것처럼, Maven 멀티 모듈 구조를 도입하여 코드 한 벌로 Boot/Framework 양쪽 빌드가 가능한 구조를 설계했습니다. common 모듈에 Controller, Service, Config, View를 모두 배치하고, boot/legacy 모듈에서 각 환경 설정만 개별 적용하는 방식으로 중복 개발을 방지했습니다. DB 스키마 7개 테이블 설계부터 Service CRUD, JSP 뷰까지 전 계층을 연동했습니다.",
-    impact: "Spring Framework / Spring Boot 공통 코드 구조를 설계하고 실제 구동을 검증했습니다. 중복 개발 방지 구조를 확립하고, React→JSP 전환, 멀티 DB 무중단 전환, 망분리 빌드 체계를 구축했습니다. Maven 멀티 모듈 설계, Boot/Framework 설정 차이를 흡수하는 코드 재사용 구조, DB 스키마 정규화 패턴 등 백엔드 시스템 설계에서 유지보수성과 확장성을 함께 고려하는 경험을 쌓았습니다.",
+    problem: "Spring Framework(외장 Tomcat/WAR)와 Spring Boot(내장 Tomcat/JAR) 두 환경이 동시 존재하여, 하나의 기능을 수정할 때마다 양쪽에서 Controller·Service·Config를 각각 수정하고 동기화해야 했습니다. 실제로 한쪽만 수정하고 다른 쪽을 빠뜨려 동작이 달라지는 문제가 발생할 여지가 있었고, .yml과 .properties의 설정 방식 차이, 고객사마다 다른 DB(MariaDB/Oracle) 환경까지 겹쳐 코드 관리가 점점 복잡해지는 구조였습니다.",
+    solution: "Flutter가 Dart 코드 하나로 iOS/Android를 빌드하는 것처럼, Maven 멀티 모듈(Root→common→boot/legacy)로 '코드는 한 벌, 설정만 분리'하는 구조를 설계했습니다. Controller, Service, Config, View(JSP)를 전부 common 모듈에 배치하고, boot/legacy에서는 각 환경 설정만 개별 적용하여 어느 쪽으로 빌드해도 동일하게 동작하도록 했습니다. DB 설계도 직접 수행하여 7개 테이블(seals, requests, departments 등)에 코드 테이블 분리 패턴을 적용하고, JdbcTemplate 기반 Service CRUD → Controller → JSP 뷰까지 전 계층을 연동했습니다.",
+    impact: "이후 기능 추가 시 common 모듈만 수정하면 Boot/Framework 양쪽에 자동 반영되어, 변경 누락으로 인한 동기화 문제가 원천 차단되었습니다. 고객사 DB 전환도 설정 파일의 드라이버 클래스 1줄만 변경하면 되는 구조를 확립했고, 망분리 환경에서도 local-maven-repo 기반으로 빌드 가능한 체계를 구축했습니다. 이 프로젝트를 통해 '같은 코드를 두 번 쓰지 않는 구조 설계'의 실무적 가치를 직접 검증했습니다.",
     notion: "https://www.notion.so/UX-2696ec8445fb80f682b4d4567609b54f?p=31e6ec8445fb806582fbf74fae799e70&pm=s",
     github: null,
     detailPath: null
