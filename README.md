@@ -1,6 +1,7 @@
 # SONGI KIM | Frontend Developer Portfolio
 
-> 데이터 기반 서비스의 UX를 설계하는 프론트엔드 개발자 김송이의 포트폴리오입니다.
+> 데이터가 많을수록, 설계가 중요합니다.
+> 복잡한 데이터를 직관적인 UI로, 어려운 비즈니스 플로우를 자연스러운 UX로 설계합니다.
 
 ## 🔗 Live
 
@@ -14,37 +15,14 @@
 - **Animation** — Scroll Reveal (IntersectionObserver), CSS Transitions
 - **Deploy** — Netlify
 
-## 📂 Project Structure
-
-```
-src/app/
-├── components/          # UI 컴포넌트
-│   ├── Hero/            # 메인 히어로 (타이핑 애니메이션, 플로팅 오브)
-│   ├── CoreStrengths/   # 핵심 역량 카드
-│   ├── FeaturedProjects/# 주요 프로젝트 카드 (코드 스니펫 썸네일)
-│   ├── BackendExperience/# 백엔드 경험 카드
-│   ├── Skills/          # 기술 스택
-│   ├── Contact/         # 연락처
-│   ├── ScrollProgress/  # 스크롤 프로그레스 바
-│   └── ThemeToggle/     # 다크/라이트 모드 토글
-├── data/
-│   └── projects.ts      # 프로젝트 데이터
-├── shared/
-│   └── useScrollReveal.ts  # 스크롤 기반 카드 등장 애니메이션 Hook
-├── projects/
-│   ├── page.tsx         # 전체 프로젝트 목록 (필터링)
-│   └── [slug]/page.tsx  # 프로젝트 상세 페이지
-└── page.tsx             # 메인 페이지
-```
-
 ## ✨ Key Features
 
-- **스크롤 기반 카드 등장 애니메이션** — IntersectionObserver로 뷰포트 진입 시 stagger reveal
-- **다크/라이트 모드** — CSS Variables 기반 테마 전환
+- **13개 프로젝트** — 금융 데이터 UX, 아키텍처 설계, 풀스택까지 Problem → Solution → Impact 구조로 정리
 - **코드 스니펫 썸네일** — 프로젝트 role(Frontend/Backend/Fullstack)에 따라 React/Java 코드 스타일 자동 분기
-- **반응형 디자인** — 모바일/PC 최적화 레이아웃
-- **타이핑 애니메이션** — Hero 섹션 인트로
-- **프로젝트 필터링** — 카테고리별 필터 (Frontend, UX/UI, Data Visualization, Platform, Backend)
+- **다크/라이트 모드** — CSS Variables 기반 테마 전환
+- **반응형 디자인** — 데스크탑/태블릿/모바일 3단계 레이아웃 대응
+- **스크롤 기반 등장 애니메이션** — IntersectionObserver stagger reveal
+- **프로젝트 필터링** — 카테고리별 필터 (UX/UI, Data Visualization, Platform, Backend, Service)
 
 ## 💡 Development Highlights
 
