@@ -1,6 +1,6 @@
 'use client';
 
-import styles from "./backendExperience.module.css";
+import styles from "./BackendExperience.module.css";
 import useScrollReveal from "@/app/shared/useScrollReveal";
 
 export default function BackendExperience() {

@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import styles from "./scrollProgress.module.css"
+import styles from "./scrollprogress.module.css"
 
 export default function ScrollProgress() {
 
