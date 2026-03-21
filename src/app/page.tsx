@@ -5,6 +5,7 @@ import CoreStrengths from "./components/CoreStrengths/CoreStrengths";
 import FeaturedProjects from "./components/FeaturedProjects/FeaturedProjects";
 import BackendExperience from "./components/BackendExperience/BackendExperience";
 import Skills from "./components/Skills/Skills";
+import DevPlayground from "./components/DevPlayground/DevPlayground";
 import Contact from "./components/Contact/Contact";
 
 export default function Home() {
@@ -19,6 +20,8 @@ export default function Home() {
       <BackendExperience />
 
       <Skills />
+
+      <DevPlayground />
 
       <Contact />
     </div>
