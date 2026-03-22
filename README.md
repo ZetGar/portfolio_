@@ -52,3 +52,20 @@ npm run dev
 ```
 
 [http://localhost:3000](http://localhost:3000)에서 확인
+
+---
+
+## 🧪 Dev Playground
+
+개인 학습과 아이디어를 실험하는 공간입니다.
+실무 외에도 스스로 설계하고 만들어가는 프로젝트들을 기록합니다.
+
+[dev-playground-orcin.vercel.app](https://dev-playground-orcin.vercel.app)
+
+| 프로젝트 | 설명 | 상태 | 기술 |
+|---------|------|------|------|
+| Activity Tracker | 이벤트 기반 유저 상태 계산 + 시각화 | ✅ 완료 | Next.js, TypeScript, Node.js |
+| Behavior CRM | 유저 상태 기반 자동화 캠페인 + 전환 추적 | ✅ 완료 | Next.js, TypeScript, Node.js, Supabase |
+| AI 커리어 트래커 (JobLog) | AI 기반 합격 패턴 분석 + 커리어 가이드 | 🚧 진행중 | Next.js, TypeScript, Supabase, Claude API |
+
+> 세 프로젝트 모두 **"데이터 기반 의사결정"** 철학으로 연결됩니다.
