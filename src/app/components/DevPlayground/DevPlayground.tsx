@@ -16,11 +16,19 @@ const projects = [
     title: "Behavior CRM",
     description:
       "유저 행동 데이터를 기반으로 이탈 위험을 감지하고 자동화 액션을 실행하는 CRM 시스템",
-    status: "진행중" as const,
-    tags: ["Next.js", "TypeScript", "Node.js"],
+    status: "완료" as const,
+    tags: ["Next.js", "TypeScript", "Node.js", "Supabase"],
     path: "/crm-system",
   },
-];
+  {
+    title: "AI 커리어 트래커 (JobLog)",
+    description:
+      "지원 데이터가 쌓일수록 AI가 합격 패턴을 분석하고 커리어 방향을 가이드해주는 채용 트래커",
+    status: "진행중" as const,
+    tags: ["Next.js", "TypeScript", "Supabase", "Claude API"],
+    path: "/job-log",
+  },
+]
 
 const DEV_PLAYGROUND_URL = "https://dev-playground-orcin.vercel.app";
 
